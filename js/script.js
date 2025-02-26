@@ -1,18 +1,12 @@
-// Example JavaScript for smooth scrolling navigation
+// Highlight the active navigation link based on the current page URL
 document.addEventListener("DOMContentLoaded", () => {
-  const navLinks = document.querySelectorAll(".site-nav a");
-  navLinks.forEach((link) => {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-      const targetId = this.getAttribute("href").substring(1);
-      const targetSection = document.getElementById(targetId);
+  const currentPage = window.location.pathname.split("/").pop() || "index.html";
+  const navLinks = document.querySelectorAll(".nav-link");
 
-      if (targetSection) {
-        window.scrollTo({
-          top: targetSection.offsetTop - 20,
-          behavior: "smooth",
-        });
-      }
-    });
+  navLinks.forEach((link) => {
+    const linkPage = link.getAttribute("href");
+    if (linkPage === currentPage) {
+      link.classList.add("active");
+    }
   });
 });
