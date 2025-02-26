@@ -1,4 +1,6 @@
-/* Reset & Base Styles */
+/* -------------------------
+   GLOBAL RESET & BASE STYLES
+-------------------------- */
 * {
     margin: 0;
     padding: 0;
@@ -10,167 +12,257 @@
   }
   
   body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 18px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 17px;
     line-height: 1.6;
     color: #333;
     background-color: #fff;
   }
   
-  /* Header & Navigation */
-  .header {
-    width: 100%;
-    background: #f8f8f8;
-    border-bottom: 1px solid #eaeaea;
+  /* A container class for consistent horizontal padding */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  /* -------------------------
+     HEADER & NAVIGATION
+  -------------------------- */
+  .site-header {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 999;
   }
   
-  .navbar {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 15px 20px;
+  .header-content {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
   }
   
-  .nav-list {
+  .logo a {
+    font-size: 1.25rem;
+    text-decoration: none;
+    color: #000;
+    font-weight: 600;
+  }
+  
+  .site-nav ul {
     list-style: none;
     display: flex;
-    gap: 20px;
+    gap: 1.5rem;
   }
   
-  .nav-link {
+  .site-nav a {
     text-decoration: none;
-    color: #555;
-    padding: 8px 12px;
-    transition: color 0.3s, border-bottom 0.3s;
+    color: #666;
+    font-weight: 500;
+    padding-bottom: 2px;
+    transition: all 0.3s ease;
   }
   
-  .nav-link:hover,
-  .nav-link.active {
+  .site-nav a:hover,
+  .site-nav a.active {
     color: #000;
     border-bottom: 2px solid #000;
   }
   
-  /* Main Content */
-  .main-content {
-    max-width: 900px;
-    margin: 20px auto;
-    padding: 0 20px;
+  /* -------------------------
+     HERO SECTION (HOME)
+  -------------------------- */
+  .hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    background: 
+      linear-gradient(
+        rgba(0, 0, 0, 0.4), 
+        rgba(0, 0, 0, 0.4)
+      ),
+      url('../assets/hero.jpg') center/cover no-repeat;
+    color: #fff;
   }
   
-  /* Hero Section (Home Page) */
-  .hero {
+  .hero-content {
+    text-align: center;
+    margin: 0 auto;
+  }
+  
+  .hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  
+  .subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+  
+  /* -------------------------
+     BUTTONS
+  -------------------------- */
+  .btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: #333;
+  }
+  
+  /* -------------------------
+     MAIN CONTENT SECTIONS
+  -------------------------- */
+  .main-section {
+    padding: 2rem 0;
+  }
+  
+  .intro,
+  .content-block {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .intro h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* About Page Layout */
+  .about-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap; /* for responsiveness */
+  }
+  
+  .profile-pic {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #ddd;
+  }
+  
+  .about-text {
+    max-width: 600px;
+    text-align: left;
+    line-height: 1.7;
+  }
+  
+  /* -------------------------
+     PROJECTS
+  -------------------------- */
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .project-card {
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding-bottom: 1rem;
+  }
+  
+  .project-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .project-card h2 {
+    font-size: 1.25rem;
+    margin: 1rem 0 0.5rem;
+  }
+  
+  .project-card p {
+    font-size: 0.95rem;
+    color: #555;
+    margin: 0 1rem 1rem;
+  }
+  
+  /* -------------------------
+     CONTACT FORM
+  -------------------------- */
+  .contact-form {
+    margin-top: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-top: 40px;
-  }
-  
-  .hero-image img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #ddd;
-    margin-bottom: 20px;
-  }
-  
-  .hero-text h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-  }
-  
-  .hero-text p {
-    font-size: 1.125rem;
-    text-align: center;
-    max-width: 600px;
-  }
-  
-  /* Content Sections (About, Projects, Contact) */
-  .content-section {
-    margin: 60px 0;
-    text-align: center;
-  }
-  
-  .content-section h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-  }
-  
-  /* Project Items */
-  .project-item {
-    margin: 40px 0;
-  }
-  
-  .project-item h2 {
-    font-size: 1.75rem;
-    margin-bottom: 15px;
-  }
-  
-  .project-item img {
-    width: 100%;
-    max-width: 800px;
-    height: auto;
-    margin-bottom: 15px;
-  }
-  
-  /* Contact Form */
-  .contact-form {
-    max-width: 600px;
-    margin: 0 auto;
-    text-align: left;
   }
   
   .contact-form label {
-    display: block;
-    margin: 10px 0 5px;
+    margin: 0.5rem 0 0.25rem;
+    font-weight: 500;
   }
   
   .contact-form input,
   .contact-form textarea {
-    width: 100%;
-    padding: 8px;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font: inherit;
   }
   
   .contact-form button {
-    margin-top: 15px;
-    padding: 10px 20px;
-    border: none;
-    background: #000;
-    color: #fff;
-    cursor: pointer;
-    transition: background 0.3s;
+    align-self: flex-start;
   }
   
-  .contact-form button:hover {
-    background: #333;
-  }
-  
-  /* Footer */
-  .footer {
-    text-align: center;
-    padding: 20px 0;
-    background: #f8f8f8;
+  /* -------------------------
+     FOOTER
+  -------------------------- */
+  .site-footer {
+    background-color: #fafafa;
     border-top: 1px solid #eaeaea;
-    margin-top: 40px;
+    padding: 1.5rem 0;
+    text-align: center;
+    margin-top: 2rem;
   }
   
-  /* Responsive Design */
-  @media (max-width: 600px) {
-    .nav-list {
-      flex-direction: column;
-      align-items: center;
+  .site-footer p {
+    color: #666;
+    font-size: 0.9rem;
+  }
+  
+  /* -------------------------
+     RESPONSIVE MEDIA QUERIES
+  -------------------------- */
+  @media (max-width: 768px) {
+    .header-content {
+      flex-wrap: wrap;
+      height: auto;
+      padding: 1rem 0;
     }
-    .navbar {
-      flex-direction: column;
+    .site-nav ul {
+      gap: 1rem;
     }
-    .hero {
-      margin-top: 20px;
+    .hero-content h1 {
+      font-size: 2.2rem;
+    }
+    .subtitle {
+      font-size: 1rem;
     }
   }
   

@@ -1,51 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact - My Minimal Portfolio</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact | My Minimal Portfolio</title>
+  <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
-  <!-- Fixed Top Navigation -->
-  <header class="header">
-    <nav class="navbar">
-      <ul class="nav-list">
-        <li><a href="index.html" class="nav-link">Home</a></li>
-        <li><a href="about.html" class="nav-link">About</a></li>
-        <li><a href="projects.html" class="nav-link">Projects</a></li>
-        <li><a href="contact.html" class="nav-link">Contact</a></li>
-      </ul>
-    </nav>
+  <!-- Header with Fixed Nav -->
+  <header class="site-header">
+    <div class="container header-content">
+      <div class="logo">
+        <a href="index.html">My Portfolio</a>
+      </div>
+      <nav class="site-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <!-- Main Content -->
-  <main class="main-content">
-    <section class="content-section">
-      <h1>Contact</h1>
-      <p>
-        If you would like to get in touch, please email me at
-        <a href="mailto:you@example.com">you@example.com</a> or use the form
-        below.
-      </p>
-      <form class="contact-form" action="mailto:you@example.com" method="post" enctype="text/plain">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required />
+  <main class="container main-section">
+    <h1>Contact</h1>
+    <p>Feel free to reach out using the form below or via email.</p>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required />
+    <form class="contact-form" action="mailto:you@example.com" method="post" enctype="text/plain">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required />
 
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required />
 
-        <button type="submit">Send</button>
-      </form>
-    </section>
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="6" required></textarea>
+
+      <button type="submit" class="btn">Send Message</button>
+    </form>
   </main>
 
   <!-- Footer -->
-  <footer class="footer">
-    <p>&copy; 2025 My Name. All rights reserved.</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2025 My Name. All rights reserved.</p>
+    </div>
   </footer>
 
   <script src="js/script.js"></script>
