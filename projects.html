@@ -1,59 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Projects | My Minimal Portfolio</title>
-  <link rel="stylesheet" href="css/style.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects | Peter Tallosy</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <!-- Header with Fixed Nav -->
-  <header class="site-header">
-    <div class="container header-content">
-      <div class="logo">
-        <a href="index.html">My Portfolio</a>
-      </div>
-      <nav class="site-nav">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-      
-    </div>
-  </header>
-
-  <!-- Main Content -->
-  <main class="container main-section">
-    <h1>Projects</h1>
-    <div class="project-grid">
-      <div class="project-card">
-        <h2>Miracle Traffic Solutions</h2>
-        <p>
-          Designing an ML-based congestion-pricing model to optimize urban traffic.
-          <br><a href="https://www.growmesh.io/" target="_blank">Project Link</a>
-        </p>
-      </div>
-      <div class="project-card">
-        <h2>RepoSnap</h2>
-        <p>
-          Developed a Chrome extension for local GitHub repository setup using OpenAI API and Node.js.
-          <br><a href="https://www.growmesh.io/" target="_blank">Project Link</a>
-        </p>
-      </div>
-      <!-- Add more projects as per the CV -->
-    </div>
-  </main>
-  
-
-  <!-- Footer -->
-  <footer class="site-footer">
+  <!-- Navigation -->
+  <nav class="navbar">
     <div class="container">
-      <p>&copy; 2025 My Name. All rights reserved.</p>
+      <a href="#hero" class="logo">Peter Tallosy</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </div>
-  </footer>
+  </nav>
+
+  <!-- Projects Section -->
+  <section id="projects" class="projects">
+    <div class="container">
+      <h2>Projects</h2>
+      <div class="project-list">
+        <div class="project">
+          <h3>Miracle Traffic Solutions</h3>
+          <p>Designing an ML-based congestion-pricing model to optimize urban traffic.</p>
+          <a href="https://www.growmesh.io/" target="_blank" class="btn">View Project</a>
+        </div>
+        <div class="project">
+          <h3>RepoSnap</h3>
+          <p>Developed a Chrome extension for local GitHub repository setup using OpenAI API and Node.js.</p>
+          <a href="https://www.growmesh.io/" target="_blank" class="btn">View Project</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <script src="js/script.js"></script>
 </body>

@@ -1,268 +1,188 @@
-/* -------------------------
-   GLOBAL RESET & BASE STYLES
--------------------------- */
+/* Global Styles */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  color: #333;
+  background: #fff;
+  line-height: 1.6;
+}
+.container {
+  width: 80%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Navigation */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.navbar .nav-links {
+  list-style: none;
+  display: flex;
+}
+.navbar .nav-links li {
+  margin-left: 1.5rem;
+}
+.navbar .nav-links li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+.navbar .nav-links li a:hover {
+  color: #555;
+}
+
+/* Hero Section */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #f5f5f5; /* Subtle background color */
+  padding-top: 60px; /* Offset for fixed navbar */
+}
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+.hero p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+.hero .btn {
+  background: #333;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+.hero .btn:hover {
+  background: #555;
+}
+
+/* About Section */
+.about {
+  padding: 4rem 0;
+  background: #fff;
+  text-align: center;
+}
+.about h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.about p {
+  max-width: 800px;
+  margin: 0 auto 1rem auto;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+/* Projects Section */
+.projects {
+  padding: 4rem 0;
+  background: #f9f9f9;
+  text-align: center;
+}
+.projects h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+.project-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+.project {
+  background: #fff;
+  padding: 2rem;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+.project:hover {
+  transform: translateY(-5px);
+}
+.project h3 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+.project p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+.project .btn {
+  background: #333;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+.project .btn:hover {
+  background: #555;
+}
+
+/* Contact Section */
+.contact {
+  padding: 4rem 0;
+  background: #fff;
+  text-align: center;
+}
+.contact h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+.contact p {
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+}
+.contact a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.5rem;
   }
-  
-  html {
-    scroll-behavior: smooth;
+  .hero p {
+    font-size: 1.1rem;
   }
-  
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 17px;
-    line-height: 1.6;
-    color: #333;
-    background-color: #fff;
-  }
-  
-  /* A container class for consistent horizontal padding */
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-  }
-  
-  /* -------------------------
-     HEADER & NAVIGATION
-  -------------------------- */
-  .site-header {
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 999;
-  }
-  
-  .header-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 60px;
-  }
-  
-  .logo a {
-    font-size: 1.25rem;
-    text-decoration: none;
-    color: #000;
-    font-weight: 600;
-  }
-  
-  .site-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 1.5rem;
-  }
-  
-  .site-nav a {
-    text-decoration: none;
-    color: #666;
-    font-weight: 500;
-    padding-bottom: 2px;
-    transition: all 0.3s ease;
-  }
-  
-  .site-nav a:hover,
-  .site-nav a.active {
-    color: #000;
-    border-bottom: 2px solid #000;
-  }
-  
-  /* -------------------------
-     HERO SECTION (HOME)
-  -------------------------- */
-  .hero {
-    min-height: 80vh;
-    display: flex;
-    align-items: center;
-    background: 
-      linear-gradient(
-        rgba(0, 0, 0, 0.4), 
-        rgba(0, 0, 0, 0.4)
-      ),
-      url('../assets/hero.jpg') center/cover no-repeat;
-    color: #fff;
-  }
-  
-  .hero-content {
-    text-align: center;
-    margin: 0 auto;
-  }
-  
-  .hero-content h1 {
-    font-size: 3rem;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-  }
-  
-  .subtitle {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
-    font-weight: 300;
-  }
-  
-  /* -------------------------
-     BUTTONS
-  -------------------------- */
-  .btn {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    background-color: #000;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn:hover {
-    background-color: #333;
-  }
-  
-  /* -------------------------
-     MAIN CONTENT SECTIONS
-  -------------------------- */
-  .main-section {
-    padding: 2rem 0;
-  }
-  
-  .intro,
-  .content-block {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  
-  .intro h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-  
-  /* About Page Layout */
-  .about-flex {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 2rem;
-    margin-top: 2rem;
-    flex-wrap: wrap; /* for responsiveness */
-  }
-  
-  .profile-pic {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 3px solid #ddd;
-  }
-  
-  .about-text {
-    max-width: 600px;
-    text-align: left;
-    line-height: 1.7;
-  }
-  
-  /* -------------------------
-     PROJECTS
-  -------------------------- */
-  .project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-  }
-  
-  .project-card {
-    background-color: #f9f9f9;
-    border-radius: 6px;
-    overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    padding-bottom: 1rem;
-  }
-  
-  .project-card img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  
-  .project-card h2 {
-    font-size: 1.25rem;
-    margin: 1rem 0 0.5rem;
-  }
-  
-  .project-card p {
-    font-size: 0.95rem;
-    color: #555;
-    margin: 0 1rem 1rem;
-  }
-  
-  /* -------------------------
-     CONTACT FORM
-  -------------------------- */
-  .contact-form {
-    margin-top: 2rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
+  .navbar .nav-links {
     flex-direction: column;
+    gap: 0.5rem;
   }
-  
-  .contact-form label {
-    margin: 0.5rem 0 0.25rem;
-    font-weight: 500;
+  .navbar .nav-links li {
+    margin: 0.5rem 0;
   }
-  
-  .contact-form input,
-  .contact-form textarea {
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font: inherit;
-  }
-  
-  .contact-form button {
-    align-self: flex-start;
-  }
-  
-  /* -------------------------
-     FOOTER
-  -------------------------- */
-  .site-footer {
-    background-color: #fafafa;
-    border-top: 1px solid #eaeaea;
-    padding: 1.5rem 0;
-    text-align: center;
-    margin-top: 2rem;
-  }
-  
-  .site-footer p {
-    color: #666;
-    font-size: 0.9rem;
-  }
-  
-  /* -------------------------
-     RESPONSIVE MEDIA QUERIES
-  -------------------------- */
-  @media (max-width: 768px) {
-    .header-content {
-      flex-wrap: wrap;
-      height: auto;
-      padding: 1rem 0;
-    }
-    .site-nav ul {
-      gap: 1rem;
-    }
-    .hero-content h1 {
-      font-size: 2.2rem;
-    }
-    .subtitle {
-      font-size: 1rem;
-    }
-  }
-  
+}
