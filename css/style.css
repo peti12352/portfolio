@@ -1,8 +1,14 @@
-/* -----------------------------------------------------
-   GLOBAL STYLES
------------------------------------------------------- */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+/* CSS Variables for easy theming */
+:root {
+  --primary-color: #6c63ff;
+  --secondary-color: #333;
+  --background-light: #f5f5f5;
+  --background-dark: #fff;
+  --accent-hover: #5750c5;
+  --font-family: 'Roboto', sans-serif;
+}
 
+/* Global Styles */
 * {
   margin: 0;
   padding: 0;
@@ -10,10 +16,10 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--font-family);
   font-size: 16px;
-  background: #fff;
-  color: #333;
+  background: var(--background-dark);
+  color: var(--secondary-color);
   line-height: 1.6;
 }
 
@@ -23,15 +29,13 @@ body {
   margin: 0 auto;
 }
 
-/* -----------------------------------------------------
-   NAVBAR
------------------------------------------------------- */
+/* Navbar */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background: #fff;
+  background: var(--background-dark);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 1000;
 }
@@ -48,16 +52,12 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #333;
+  color: var(--secondary-color);
   text-decoration: none;
 }
 
-.logo .first-name {
-  color: #333;
-}
-
 .logo .last-name {
-  color: #6c63ff; /* Purple accent */
+  color: var(--primary-color);
 }
 
 .nav-links {
@@ -68,30 +68,29 @@ body {
 
 .nav-links li a {
   text-decoration: none;
-  color: #333;
+  color: var(--secondary-color);
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
-.nav-links li a:hover {
-  color: #6c63ff; /* Purple accent on hover */
+.nav-links li a:hover,
+.nav-links li a.active {
+  color: var(--primary-color);
 }
 
-/* -----------------------------------------------------
-   HERO SECTION
------------------------------------------------------- */
+/* Hero Section */
 .hero {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
   padding-top: 80px; /* offset for navbar */
-  background: #f5f5f5;
+  background: var(--background-light);
 }
 
 .hero-content {
   display: flex;
-  flex-wrap: wrap; /* ensures responsiveness */
+  flex-wrap: wrap;
   align-items: center;
   gap: 2rem;
   text-align: left;
@@ -102,7 +101,7 @@ body {
   height: 220px;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .hero-text h1 {
@@ -118,7 +117,7 @@ body {
 
 .btn {
   display: inline-block;
-  background: #6c63ff; /* Purple accent */
+  background: var(--primary-color);
   color: #fff;
   padding: 0.75rem 1.5rem;
   border-radius: 4px;
@@ -128,15 +127,13 @@ body {
 }
 
 .btn:hover {
-  background: #5750c5;
+  background: var(--accent-hover);
 }
 
-/* -----------------------------------------------------
-   ABOUT SECTION
------------------------------------------------------- */
+/* About Section */
 .about {
   padding: 4rem 0;
-  background: #fff;
+  background: var(--background-dark);
   text-align: center;
 }
 
@@ -151,9 +148,7 @@ body {
   line-height: 1.8;
 }
 
-/* -----------------------------------------------------
-   EXPERIENCE SECTION
------------------------------------------------------- */
+/* Experience Section */
 .experience {
   padding: 4rem 0;
   background: #fafafa;
@@ -174,7 +169,7 @@ body {
 }
 
 .experience-item {
-  background: #fff;
+  background: var(--background-dark);
   border-radius: 6px;
   padding: 1.5rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
@@ -185,12 +180,10 @@ body {
   margin-bottom: 0.5rem;
 }
 
-/* -----------------------------------------------------
-   PROJECTS SECTION
------------------------------------------------------- */
+/* Projects Section */
 .projects {
   padding: 4rem 0;
-  background: #fff;
+  background: var(--background-dark);
   text-align: center;
 }
 
@@ -230,7 +223,7 @@ body {
 }
 
 .project .btn {
-  background: #333;
+  background: var(--secondary-color);
   margin-top: 1rem;
 }
 
@@ -238,9 +231,7 @@ body {
   background: #555;
 }
 
-/* -----------------------------------------------------
-   CONTACT SECTION
------------------------------------------------------- */
+/* Contact Section */
 .contact {
   padding: 4rem 0;
   background: #fafafa;
@@ -258,7 +249,7 @@ body {
 }
 
 .contact a {
-  color: #6c63ff;
+  color: var(--primary-color);
   text-decoration: none;
   font-weight: 500;
 }
@@ -267,9 +258,16 @@ body {
   text-decoration: underline;
 }
 
-/* -----------------------------------------------------
-   MEDIA QUERIES
------------------------------------------------------- */
+/* Footer */
+footer {
+  padding: 1rem 0;
+  background: var(--background-dark);
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--secondary-color);
+}
+
+/* Media Queries */
 @media (max-width: 768px) {
   .nav-container {
     flex-wrap: wrap;
