@@ -121,6 +121,7 @@ hr {
   color: #999;
   text-align: right;
   padding-right: 5px;
+  white-space: nowrap;
 }
 
 /* Column 2: The vertical line and optional icon/dot */
@@ -129,16 +130,16 @@ hr {
   position: relative;
   border-left: 2px solid #cfcfcf;
   min-height: 20px;
-  padding-left: 10px; /* space for the dot if needed */
+  padding-left: 28px; /* space for the dot if needed */
 }
 
 /* Increase the width of your timeline logos */
 .ico img {
-  width: 32px;            /* larger logo size */
+  width: 40px;            /* larger logo size */
   margin-left: -8px;      /* tweak horizontal alignment */
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  position: absolute; /* position the logo absolutely */
+  top: 50%; /* center vertically */
+  transform: translateY(-50%); /
 }
 
 /* The small dot (if you also want a timeline dot) */
