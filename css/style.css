@@ -19,26 +19,28 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 0;
+  align-items: center;  /* Center items vertically */
 }
 
 /* Header area (photo + name) */
 #dhead {
   margin-top: 20px;
-  max-width: 900px;  /* Match section max-width */
+  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
 }
 
 #dpic {
   grid-column: span 6;
-  text-align: center;  /* Changed from right to center */
-  padding-right: 100px;  /* Add padding to shift image left */
+  text-align: right;  /* Align photo to the right */
+  padding-right: 40px;  /* Reduced padding for closer spacing */
 }
 
 #ddesc {
   grid-column: span 6;
-  padding-top: 40px;
-  padding-left: 0;  /* Remove left padding */
+  padding-top: 20px;  /* Reduced top padding */
+  padding-left: 20px;  /* Add some padding to maintain spacing */
+  text-align: left;
 }
 
 /* Mobile adjustments for header */
@@ -51,7 +53,11 @@
   }
   
   #dpic {
-    padding-right: 0;  /* Remove padding on mobile */
+    padding-right: 0;
+  }
+  
+  #ddesc {
+    padding-left: 0;
   }
 }
 
