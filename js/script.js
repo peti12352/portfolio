@@ -51,62 +51,49 @@ document.addEventListener("DOMContentLoaded", function () {
     })
   );
 
-  // Enhanced email protection and reveal functionality
-  const rot13 = (str) => {
-    return str.replace(/[a-zA-Z]/g, (char) => {
-      const base = char <= "Z" ? 65 : 97;
-      return String.fromCharCode(
-        ((char.charCodeAt(0) - base + 13) % 26) + base
-      );
-    });
+  // Email protection functionality
+  const rot13 = (message) => {
+    const alpha =
+      "abcdefghijklmnopqrstuvwxyzabcdefghijklmABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLM";
+    return message.replace(
+      /[a-z]/gi,
+      (letter) => alpha[alpha.indexOf(letter) + 13]
+    );
   };
 
-  // Initialize email functionality when DOM is loaded
+  let e_is_shown = false;
   const emailIcon = document.getElementById("iemail");
-  const emailDisplay = document.getElementById("demail");
-  let isEmailShown = false;
+  const demail = document.getElementById("demail");
+  const msg = "crgre@gnyybfl.uh"; // "peter@tallosy.hu" in rot13
 
-  // Encoded email - this makes it harder for bots to scrape
-  const encodedEmail = "crgre@gnyybfl.uh"; // "peter@tallosy.hu" in ROT13
-
-  emailIcon.addEventListener("click", () => {
-    if (!isEmailShown) {
-      // Decode and display email
-      const decodedEmail = rot13(encodedEmail);
-      emailDisplay.textContent = decodedEmail;
-      emailDisplay.style.opacity = "1";
-
-      // Create a temporary input for copy functionality
-      const tempInput = document.createElement("input");
-      tempInput.value = decodedEmail;
-      document.body.appendChild(tempInput);
-      tempInput.select();
-      document.execCommand("copy");
-      document.body.removeChild(tempInput);
-
-      // Update tooltip
-      emailIcon.title = "Email copied to clipboard!";
-
-      // Reset tooltip after 2 seconds
+  emailIcon.addEventListener("click", function (e) {
+    e.stopPropagation();
+    if (!e_is_shown) {
       setTimeout(() => {
-        emailIcon.title = "Click to reveal email";
-      }, 2000);
+        demail.textContent = rot13(msg);
+        demail.style.opacity = "1";
+        demail.style.visibility = "visible";
+      }, 50); // Small delay to ensure proper transition
     } else {
-      // Hide email
-      emailDisplay.textContent = "";
-      emailDisplay.style.opacity = "0";
-      emailIcon.title = "Click to reveal email";
+      demail.style.opacity = "0";
+      demail.style.visibility = "hidden";
+      // Clear content after fade out
+      setTimeout(() => {
+        demail.textContent = "";
+      }, 300); // Match transition duration
     }
-    isEmailShown = !isEmailShown;
+    e_is_shown = !e_is_shown;
   });
 
   // Hide email when clicking outside
   document.addEventListener("click", (event) => {
-    if (!emailIcon.contains(event.target) && isEmailShown) {
-      emailDisplay.textContent = "";
-      emailDisplay.style.opacity = "0";
-      emailIcon.title = "Click to reveal email";
-      isEmailShown = false;
+    if (!emailIcon.contains(event.target) && e_is_shown) {
+      demail.style.opacity = "0";
+      demail.style.visibility = "hidden";
+      setTimeout(() => {
+        demail.textContent = "";
+      }, 300);
+      e_is_shown = false;
     }
   });
 });
