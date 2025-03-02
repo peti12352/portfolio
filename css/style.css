@@ -5,6 +5,105 @@
   box-sizing: border-box;
 }
 
+/* Theme variables */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --text-color-light: #666666;
+  --border-color: #dddddd;
+  --hover-bg: #f8f8f8;
+  --card-bg: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.05);
+  --accent-color: #2196F3;
+  --timeline-color: #dddddd;
+}
+
+/* Dark mode colors */
+[data-theme="dark"] {
+  --bg-color: #1a1a1a;
+  --text-color: #e0e0e0;
+  --text-color-light: #a0a0a0;
+  --border-color: #404040;
+  --hover-bg: #2a2a2a;
+  --card-bg: #242424;
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --accent-color: #64b5f6;
+  --timeline-color: #404040;
+}
+
+/* Dark mode transition */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 50%;
+  background: var(--card-bg);
+  color: var(--text-color);
+  cursor: pointer;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  z-index: 1000;
+  transition: transform 0.2s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+}
+
+.theme-toggle:active {
+  transform: scale(0.9);
+}
+
+/* Sun and moon animation */
+.sun-and-moon {
+  transition: transform 0.5s ease;
+}
+
+.sun-and-moon > .sun {
+  transform-origin: center center;
+  transition: transform 0.5s ease;
+}
+
+.sun-and-moon > .sun-beams {
+  transform-origin: center center;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.sun-and-moon > .moon > circle {
+  transform-origin: center center;
+  transition: transform 0.5s ease;
+}
+
+[data-theme="dark"] .sun-and-moon {
+  transform: rotate(180deg);
+}
+
+[data-theme="dark"] .sun-and-moon > .sun {
+  transform: scale(1.75);
+}
+
+[data-theme="dark"] .sun-and-moon > .sun-beams {
+  transform: rotate(45deg);
+  opacity: 0;
+}
+
+[data-theme="dark"] .moon > circle {
+  transform: translateX(-7px);
+}
+
 /* Layout container for header, skills, etc. */
 .container {
   margin-left: auto;
