@@ -18,6 +18,8 @@
   --timeline-color: #000000;
   --card-border: 1px solid var(--border-color);
   --card-radius: 4px;
+  --mobile-padding: 16px;
+  --mobile-font-scale: 0.95;
 }
 
 /* Dark mode colors */
@@ -653,7 +655,7 @@ hr {
 
 /* Location styling */
 .location {
-  color: #666;
+  color: var(--text-color-light);
   font-size: 15px;
   margin-bottom: 12px;
   display: flex;
@@ -665,6 +667,12 @@ hr {
   width: 16px;
   height: 16px;
   opacity: 0.7;
+  filter: none;
+}
+
+[data-theme="dark"] .location-icon {
+  filter: invert(1);
+  opacity: 0.8;
 }
 
 .location-link {
@@ -681,7 +689,7 @@ hr {
 }
 
 [data-theme="dark"] .location-link {
-  color: #b0b0b0;
+  color: var(--text-color-light);
 }
 
 [data-theme="dark"] .location-link:hover {
@@ -892,5 +900,134 @@ hr {
   color: var(--text-color-light);
   margin-left: 4px;
   font-weight: normal;
+}
+
+/* Mobile improvements */
+@media (max-width: 768px) {
+  /* Adjust container padding */
+  .container {
+    padding-left: var(--mobile-padding);
+    padding-right: var(--mobile-padding);
+  }
+
+  /* Improve header readability */
+  h1 {
+    font-size: 32px;
+    letter-spacing: -0.3px;
+    line-height: 1.3;
+  }
+
+  /* Enhance intro text */
+  .intro-frame {
+    font-size: calc(16px * var(--mobile-font-scale));
+    padding: 16px;
+    margin: 12px 0;
+    line-height: 1.5;
+  }
+
+  /* Improve entry layout */
+  .entry {
+    grid-template-columns: 90px 50px 1fr;
+    gap: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+
+  /* Adjust timespan */
+  .timespan {
+    font-size: 13px;
+    padding: 6px 10px;
+    margin-right: 8px;
+  }
+
+  /* Enhance description readability */
+  .desc {
+    font-size: calc(15px * var(--mobile-font-scale));
+    line-height: 1.6;
+  }
+
+  /* Improve timeline items */
+  .timeline-item {
+    font-size: calc(14px * var(--mobile-font-scale));
+    padding: 4px 0;
+  }
+
+  /* Better skill category spacing */
+  .skill-category {
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+
+  .skill-header {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .skill-content {
+    font-size: calc(14px * var(--mobile-font-scale));
+    line-height: 1.6;
+  }
+
+  /* Enhance interests section */
+  .interests ul {
+    gap: 12px;
+  }
+
+  .interests li {
+    padding: 14px 16px;
+    font-size: calc(14px * var(--mobile-font-scale));
+  }
+
+  /* Improve location display */
+  .location {
+    font-size: calc(14px * var(--mobile-font-scale));
+    margin-bottom: 16px;
+  }
+
+  /* Better spacing for about section */
+  .about-content {
+    font-size: calc(15px * var(--mobile-font-scale));
+    line-height: 1.7;
+    padding: 0 var(--mobile-padding);
+  }
+
+  .about-content p {
+    margin-bottom: 16px;
+  }
+
+  /* Enhance section titles */
+  .section .ctitle {
+    font-size: 26px;
+    margin: 32px 0;
+  }
+
+  /* Improve icon visibility */
+  .ico img {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* Better email reveal */
+  .email-reveal {
+    font-size: 13px;
+    padding: 10px 14px;
+  }
+}
+
+/* Additional tablet improvements */
+@media (min-width: 769px) and (max-width: 991px) {
+  .container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .entry {
+    grid-template-columns: 100px 60px 1fr;
+    gap: 16px;
+  }
+
+  .desc {
+    font-size: 15px;
+  }
 }
 
