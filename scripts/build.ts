@@ -10,26 +10,17 @@ dirs.forEach(dir => {
   }
 });
 
-// Copy static files
-const staticFiles = [
-  { src: 'templates/index.html', dest: 'dist/index.html' },
-  { src: 'css/style.css', dest: 'dist/css/style.css' },
-  { src: 'js/script.js', dest: 'dist/js/script.js' }
-];
+// Define source and destination paths
+const paths = {
+  template: path.join(__dirname, '..', 'templates', 'index.html'),
+  css: path.join(__dirname, '..', 'css', 'style.css'),
+  js: path.join(__dirname, '..', 'js', 'script.js'),
+  assets: path.join(__dirname, '..', 'assets'),
+  dist: path.join(__dirname, '..', 'dist')
+};
 
-// Copy assets
-const assetsDir = 'assets';
-if (fs.existsSync(assetsDir)) {
-  fs.readdirSync(assetsDir).forEach(file => {
-    staticFiles.push({
-      src: path.join(assetsDir, file),
-      dest: path.join('dist/assets', file)
-    });
-  });
-}
-
-// Copy files with error handling
-staticFiles.forEach(({ src, dest }) => {
+// Copy static files with error handling
+const copyFile = (src: string, dest: string) => {
   try {
     if (!fs.existsSync(src)) {
       console.error(`Error: Source file ${src} not found`);
@@ -41,10 +32,24 @@ staticFiles.forEach(({ src, dest }) => {
     console.error(`Error copying ${src} to ${dest}:`, err);
     process.exit(1);
   }
-});
+};
 
-// Read template
-let template = fs.readFileSync('templates/index.html', 'utf8');
+// Copy main files
+copyFile(paths.template, path.join(paths.dist, 'index.html'));
+copyFile(paths.css, path.join(paths.dist, 'css', 'style.css'));
+copyFile(paths.js, path.join(paths.dist, 'js', 'script.js'));
+
+// Copy assets if they exist
+if (fs.existsSync(paths.assets)) {
+  fs.readdirSync(paths.assets).forEach(file => {
+    const src = path.join(paths.assets, file);
+    const dest = path.join(paths.dist, 'assets', file);
+    copyFile(src, dest);
+  });
+}
+
+// Read and process template
+let template = fs.readFileSync(paths.template, 'utf8');
 
 // Replace content placeholders
 Object.entries(content).forEach(([key, value]) => {
@@ -53,5 +58,5 @@ Object.entries(content).forEach(([key, value]) => {
 });
 
 // Write final HTML
-fs.writeFileSync('dist/index.html', template);
+fs.writeFileSync(path.join(paths.dist, 'index.html'), template);
 console.log('Build completed successfully!');
