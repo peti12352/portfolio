@@ -1,8 +1,42 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Theme toggle functionality
+  // Theme toggle functionality with optimizations
   const themeToggle = document.getElementById("theme-toggle");
+  let isThemeTransitioning = false;
 
-  // Check for saved theme preference, otherwise use system preference
+  // Pre-load both themes
+  const preloadThemes = () => {
+    const themes = ["light", "dark"];
+    themes.forEach((theme) => {
+      const tempDiv = document.createElement("div");
+      tempDiv.style.position = "absolute";
+      tempDiv.style.width = "0";
+      tempDiv.style.height = "0";
+      tempDiv.style.opacity = "0";
+      tempDiv.style.pointerEvents = "none";
+      tempDiv.setAttribute("data-theme", theme);
+      document.body.appendChild(tempDiv);
+      setTimeout(() => tempDiv.remove(), 1000);
+    });
+  };
+
+  // Optimized theme application with transition lock
+  const setTheme = (theme) => {
+    if (isThemeTransitioning) return;
+    isThemeTransitioning = true;
+
+    // Use requestAnimationFrame for smooth transition
+    requestAnimationFrame(() => {
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("theme", theme);
+
+      // Reset transition lock after animation completes
+      setTimeout(() => {
+        isThemeTransitioning = false;
+      }, 300); // Match your CSS transition duration
+    });
+  };
+
+  // Check for saved theme preference with system color scheme as fallback
   const getPreferredTheme = () => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {
@@ -13,30 +47,38 @@ document.addEventListener("DOMContentLoaded", function () {
       : "light";
   };
 
-  // Apply theme
-  const setTheme = (theme) => {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-  };
-
-  // Initial theme setup
+  // Initial setup
+  preloadThemes();
   setTheme(getPreferredTheme());
 
-  // Toggle theme
+  // Optimized theme toggle with debounce
+  let toggleTimeout;
   themeToggle.addEventListener("click", () => {
-    const currentTheme = document.documentElement.getAttribute("data-theme");
-    const newTheme = currentTheme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
+    if (toggleTimeout) clearTimeout(toggleTimeout);
+
+    toggleTimeout = setTimeout(() => {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+      setTheme(newTheme);
+    }, 50);
   });
 
-  // Listen for system theme changes
-  window
-    .matchMedia("(prefers-color-scheme: dark)")
-    .addEventListener("change", (e) => {
-      if (!localStorage.getItem("theme")) {
+  // Optimized system theme change listener
+  const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+  const handleSystemThemeChange = (e) => {
+    if (!localStorage.getItem("theme")) {
+      requestAnimationFrame(() => {
         setTheme(e.matches ? "dark" : "light");
-      }
-    });
+      });
+    }
+  };
+
+  // Use newer event listener when available
+  if (mediaQuery.addEventListener) {
+    mediaQuery.addEventListener("change", handleSystemThemeChange);
+  } else {
+    mediaQuery.addListener(handleSystemThemeChange);
+  }
 
   // Smooth scrolling for navigation links
   const navLinks = document.querySelectorAll(".nav-links a");

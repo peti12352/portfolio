@@ -20,6 +20,9 @@
   --card-radius: 4px;
   --mobile-padding: 16px;
   --mobile-font-scale: 0.95;
+  --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-duration: 0.2s;
+  --transition-duration-long: 0.3s;
 }
 
 /* Dark mode colors */
@@ -35,11 +38,139 @@
   --timeline-color: #ffffff;
 }
 
-/* Dark mode transition */
+/* Optimize transitions */
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color var(--transition-duration) var(--transition-timing),
+              color var(--transition-duration) var(--transition-timing);
+  will-change: background-color, color;
+}
+
+/* Optimize all transitions */
+.entry,
+.skill-category,
+.intro-frame,
+.interests li,
+.subtle-link,
+.location-link,
+.theme-toggle,
+.email-reveal,
+.timeline-item,
+.ico img,
+.ppic {
+  transition: all var(--transition-duration) var(--transition-timing);
+  will-change: transform, border-color, box-shadow;
+}
+
+/* Hardware accelerate cards */
+.entry,
+.skill-category,
+.intro-frame,
+.interests li {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Smooth hover transitions */
+.entry:hover,
+.skill-category:hover,
+.intro-frame:hover,
+.interests li:hover {
+  transform: translateZ(0) translateY(-2px);
+  border-color: var(--accent-color);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+/* Optimize theme toggle transitions */
+.theme-toggle {
+  transform: translateZ(0);
+  transition: background-color var(--transition-duration) var(--transition-timing),
+              transform var(--transition-duration) var(--transition-timing);
+}
+
+.theme-toggle:hover {
+  transform: translateZ(0) scale(1.05);
+}
+
+.theme-toggle:active {
+  transform: translateZ(0) scale(0.95);
+}
+
+/* Optimize sun and moon animation */
+.sun-and-moon {
+  transform: translateZ(0);
+  transition: transform var(--transition-duration-long) var(--transition-timing);
+  will-change: transform;
+}
+
+.sun-and-moon > .sun {
+  transform-origin: center center;
+  transition: transform var(--transition-duration-long) var(--transition-timing);
+  will-change: transform;
+}
+
+.sun-and-moon > .sun-beams {
+  transform-origin: center center;
+  transition: transform var(--transition-duration-long) var(--transition-timing),
+              opacity var(--transition-duration-long) var(--transition-timing);
+  will-change: transform, opacity;
+}
+
+/* Optimize dark mode specific transitions */
+[data-theme="dark"] .entry,
+[data-theme="dark"] .skill-category,
+[data-theme="dark"] .intro-frame,
+[data-theme="dark"] .interests li,
+[data-theme="dark"] .email-reveal {
+  transition: background-color var(--transition-duration) var(--transition-timing),
+              border-color var(--transition-duration) var(--transition-timing),
+              transform var(--transition-duration) var(--transition-timing),
+              box-shadow var(--transition-duration) var(--transition-timing);
+}
+
+/* Optimize icon transitions */
+.ico img {
+  transition: filter var(--transition-duration) var(--transition-timing),
+              transform var(--transition-duration) var(--transition-timing),
+              opacity var(--transition-duration) var(--transition-timing);
+  will-change: filter, transform;
+}
+
+[data-theme="dark"] .ico img {
+  transition: filter var(--transition-duration) var(--transition-timing),
+              transform var(--transition-duration) var(--transition-timing),
+              opacity var(--transition-duration) var(--transition-timing);
+}
+
+/* Optimize text transitions */
+h1, h2, h3, .desc, .timespan, .skill-header, .skill-content {
+  transition: color var(--transition-duration) var(--transition-timing);
+}
+
+/* Optimize timeline transitions */
+#projects.section::before,
+#education.section::before {
+  transition: background-color var(--transition-duration) var(--transition-timing),
+              opacity var(--transition-duration) var(--transition-timing);
+}
+
+/* Optimize email reveal animation */
+.email-char {
+  display: inline-block;
+  transition: opacity var(--transition-duration) var(--transition-timing);
+  will-change: opacity;
+}
+
+/* Optimize mobile transitions */
+@media (max-width: 768px) {
+  .entry,
+  .skill-category,
+  .intro-frame,
+  .interests li {
+    transition-duration: calc(var(--transition-duration) * 0.8);
+  }
 }
 
 /* Theme toggle button - minimal animation */
@@ -529,13 +660,6 @@ hr {
 #email-container {
   display: inline-block;
   position: relative;
-}
-
-.email-char {
-  display: inline-block;
-  transition: opacity 0.2s ease;
-  user-select: none;
-  pointer-events: none;
 }
 
 .email-reveal {
