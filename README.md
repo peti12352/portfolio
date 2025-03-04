@@ -4,12 +4,10 @@ A modern, performant, and maintainable personal portfolio site built with TypeSc
 
 ## Features
 
-- 🎨 Dark/Light theme with smooth transitions
-- 📱 Fully responsive design
-- ⚡ Optimized performance (100 Lighthouse score)
+- 🎨 Dark theme
+- ⚡ Optimized no-framework design (95 Lighthouse score)
 - 🔒 Secure email protection
 - 🛠 Type-safe content management
-- 🔄 Automated builds with GitHub Actions
 
 ## Quick Start
 
