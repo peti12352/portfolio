@@ -3,7 +3,7 @@ import * as path from 'path';
 import { content } from '../src/content';
 
 // Ensure required directories exist
-const dirs = ['dist', 'dist/css', 'dist/js', 'dist/assets'];
+const dirs = ['public', 'public/css', 'public/js', 'public/assets'];
 dirs.forEach(dir => {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
@@ -16,7 +16,7 @@ const paths = {
   css: path.join(__dirname, '..', 'css', 'style.css'),
   js: path.join(__dirname, '..', 'js', 'script.js'),
   assets: path.join(__dirname, '..', 'assets'),
-  dist: path.join(__dirname, '..', 'dist')
+  public: path.join(__dirname, '..', 'public')
 };
 
 // Copy static files with error handling
@@ -35,15 +35,15 @@ const copyFile = (src: string, dest: string) => {
 };
 
 // Copy main files
-copyFile(paths.html, path.join(paths.dist, 'index.html'));
-copyFile(paths.css, path.join(paths.dist, 'css', 'style.css'));
-copyFile(paths.js, path.join(paths.dist, 'js', 'script.js'));
+copyFile(paths.html, path.join(paths.public, 'index.html'));
+copyFile(paths.css, path.join(paths.public, 'css', 'style.css'));
+copyFile(paths.js, path.join(paths.public, 'js', 'script.js'));
 
 // Copy assets if they exist
 if (fs.existsSync(paths.assets)) {
   fs.readdirSync(paths.assets).forEach(file => {
     const src = path.join(paths.assets, file);
-    const dest = path.join(paths.dist, 'assets', file);
+    const dest = path.join(paths.public, 'assets', file);
     copyFile(src, dest);
   });
 }
