@@ -12,7 +12,7 @@ dirs.forEach(dir => {
 
 // Define source and destination paths
 const paths = {
-  template: path.join(__dirname, '..', 'templates', 'index.html'),
+  html: path.join(__dirname, '..', 'index.html'),
   css: path.join(__dirname, '..', 'css', 'style.css'),
   js: path.join(__dirname, '..', 'js', 'script.js'),
   assets: path.join(__dirname, '..', 'assets'),
@@ -35,7 +35,7 @@ const copyFile = (src: string, dest: string) => {
 };
 
 // Copy main files
-copyFile(paths.template, path.join(paths.dist, 'index.html'));
+copyFile(paths.html, path.join(paths.dist, 'index.html'));
 copyFile(paths.css, path.join(paths.dist, 'css', 'style.css'));
 copyFile(paths.js, path.join(paths.dist, 'js', 'script.js'));
 
@@ -48,15 +48,4 @@ if (fs.existsSync(paths.assets)) {
   });
 }
 
-// Read and process template
-let template = fs.readFileSync(paths.template, 'utf8');
-
-// Replace content placeholders
-Object.entries(content).forEach(([key, value]) => {
-  const placeholder = new RegExp(`{{${key}}}`, 'g');
-  template = template.replace(placeholder, JSON.stringify(value));
-});
-
-// Write final HTML
-fs.writeFileSync(path.join(paths.dist, 'index.html'), template);
 console.log('Build completed successfully!');
