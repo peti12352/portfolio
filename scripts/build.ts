@@ -12,7 +12,7 @@ dirs.forEach(dir => {
 
 // Copy static files
 const staticFiles = [
-  { src: 'templates/index.html.j2', dest: 'dist/index.html' },
+  { src: 'templates/index.html', dest: 'dist/index.html' },
   { src: 'css/style.css', dest: 'dist/css/style.css' },
   { src: 'js/script.js', dest: 'dist/js/script.js' }
 ];
@@ -44,7 +44,7 @@ staticFiles.forEach(({ src, dest }) => {
 });
 
 // Read template
-let template = fs.readFileSync('templates/index.html.j2', 'utf8');
+let template = fs.readFileSync('templates/index.html', 'utf8');
 
 // Replace content placeholders
 Object.entries(content).forEach(([key, value]) => {
