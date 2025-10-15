@@ -7,17 +7,17 @@
 
 /* Theme variables */
 :root {
-  --bg-color: #ffffff;
-  --text-color: #333333;
-  --text-color-light: #666666;
-  --border-color: #000000;
-  --hover-bg: #f8f8f8;
+  --bg-color: #f8f8f8; /* A very light grey for softer background */
+  --text-color: #212121; /* Darker text for better contrast */
+  --text-color-light: #555555;
+  --border-color: #e0e0e0; /* Lighter border color */
+  --hover-bg: #eeeeee;
   --card-bg: #ffffff;
-  --shadow-color: rgba(0, 0, 0, 0.05);
-  --accent-color: #2196F3;
-  --timeline-color: #000000;
+  --shadow-color: rgba(0, 0, 0, 0.08); /* Slightly more prominent shadow */
+  --accent-color: #1976D2; /* A slightly deeper blue for accent */
+  --timeline-color: #bdbdbd; /* Lighter timeline color */
   --card-border: 1px solid var(--border-color);
-  --card-radius: 4px;
+  --card-radius: 6px; /* Slightly more rounded cards */
   --mobile-padding: 16px;
   --mobile-font-scale: 0.95;
   --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
@@ -27,21 +27,23 @@
 
 /* Dark mode colors */
 [data-theme="dark"] {
-  --bg-color: #121212;
-  --text-color: #e6e6e6;
-  --text-color-light: #b0b0b0;
-  --border-color: #ffffff;
-  --hover-bg: #1e1e1e;
-  --card-bg: #1a1a1a;
-  --shadow-color: rgba(0, 0, 0, 0.3);
+  --bg-color: #1a1a1a;
+  --text-color: #f5f5f5;
+  --text-color-light: #c0c0c0;
+  --border-color: #424242;
+  --hover-bg: #2a2a2a;
+  --card-bg: #212121;
+  --shadow-color: rgba(0, 0, 0, 0.4);
   --accent-color: #64b5f6;
-  --timeline-color: #ffffff;
+  --timeline-color: #757575;
 }
 
 /* Optimize transitions */
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
+  font-size: 16px;
+  line-height: 1.6;
   transition: background-color var(--transition-duration) var(--transition-timing),
               color var(--transition-duration) var(--transition-timing);
   will-change: background-color, color;
@@ -248,6 +250,12 @@ h1, h2, h3, .desc, .timespan, .skill-header, .skill-content {
   max-width: 970px;
 }
 
+@media (min-width: 992px) {
+  .container {
+    max-width: 1140px; /* Wider container for larger screens */
+  }
+}
+
 /* Grid row for the header area */
 .row {
   display: grid;
@@ -297,16 +305,16 @@ h1, h2, h3, .desc, .timespan, .skill-header, .skill-content {
 
 h1 {
   font-size: 42px;
-  font-weight: 600;  /* Semi-bold weight */
-  color: #333;
-  margin: 0 0 12px 0;
-  letter-spacing: -0.5px;  /* Tighter letter spacing */
-  line-height: 1.2;
+  font-weight: 700;  /* Make heading slightly bolder */
+  color: var(--text-color);
+  margin: 0 0 16px 0;
+  letter-spacing: -0.8px;  /* Slightly tighter letter spacing for impact */
+  line-height: 1.1;
 }
 
 @media (max-width: 991px) {
   h1 {
-    font-size: 36px;
+    font-size: 38px;
   }
 }
 
@@ -494,8 +502,8 @@ hr {
 /* Description area */
 .desc {
   grid-column: 3;
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: 16.5px;
+  line-height: 1.6;
   padding: 0;
   position: relative;
   z-index: 1;
@@ -556,7 +564,7 @@ hr {
   left: 0;
   width: 40px;
   height: 2px;
-  background: #2196F3;
+  background: var(--accent-color);
   border-radius: 2px;
 }
 
@@ -702,18 +710,72 @@ hr {
 .about-content {
   max-width: 700px;
   margin: 0 auto;
-  line-height: 1.6;
-  color: #444;
+  line-height: 1.7;
+  color: var(--text-color-light);
 }
 
 .interests {
-  margin-top: 30px;
+  margin-top: 40px; /* Increased margin-top */
+  margin-bottom: 40px; /* Added margin-bottom */
 }
 
 .interests h3 {
-  font-size: 18px;
+  font-size: 22px; /* Larger font size */
+  font-weight: 700; /* Bolder */
   color: var(--text-color);
-  margin-bottom: 15px;
+  margin-bottom: 25px; /* More space below the heading */
+  text-align: left; /* Align to left as in the image */
+  position: relative;
+}
+
+.interests h3::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: var(--accent-color);
+  border-radius: 2px;
+}
+
+/* Dark mode specific for interests h3 */
+[data-theme="dark"] .interests h3 {
+  color: #ffffff;
+}
+
+.call-to-action {
+  margin-top: 40px; /* Adjusted margin-top for better spacing */
+  padding: 24px;
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  text-align: center;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text-color);
+  box-shadow: 0 2px 8px var(--shadow-color);
+  transition: all 0.2s ease;
+}
+
+.call-to-action:hover {
+  border-color: var(--accent-color);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.call-to-action p {
+  margin-bottom: 0;
+  color: inherit;
+}
+
+.call-to-action .subtle-link {
+  font-weight: 600;
+  border-bottom: 2px solid var(--accent-color);
+}
+
+.call-to-action .subtle-link:hover {
+  color: var(--accent-color);
+  border-bottom-color: var(--accent-color);
 }
 
 .interests ul {
@@ -725,18 +787,23 @@ hr {
 }
 
 .interests li {
-  padding: 16px 20px;
+  padding: 20px 24px;
   background: var(--card-bg);
   border-radius: var(--card-radius);
-  font-size: 15px;
+  font-size: 16px; /* Slightly larger font size */
   border: var(--card-border);
   transition: all 0.2s ease;
+  text-align: center; /* Center text within the cards */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px; /* Ensure a minimum height for consistency */
 }
 
 .interests li:hover {
   border-color: var(--accent-color);
   transform: translateY(-2px);
-  box-shadow: 0 2px 8px var(--shadow-color);
+  box-shadow: 0 4px 12px var(--shadow-color);
 }
 
 /* Interest item link styling - simplified hover */
@@ -744,8 +811,8 @@ hr {
   display: block;
   color: inherit;
   text-decoration: none;
-  padding: 16px 20px;
-  margin: -16px -20px;
+  padding: 0; /* Remove padding to allow flexbox centering */
+  margin: 0; /* Remove margin */
   transition: color 0.2s ease;
 }
 
@@ -769,7 +836,7 @@ hr {
 .subtle-link {
   color: inherit;
   text-decoration: none;
-  border-bottom: 1px dotted var(--border-color);
+  border-bottom: 1px dotted var(--text-color-light);
 }
 
 .subtle-link:hover {
