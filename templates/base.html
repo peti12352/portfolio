@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{NAME}}</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5" />
+            <path
+                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+        </svg>
+    </button>
+
+    <main class="container">
+        <header>
+            <div class="profile-section">
+                <img src="assets/profile.jpg" class="ppic" alt="{{NAME}}">
+                <div class="intro-text">
+                    <h1>{{NAME}}</h1>
+                    <p>{{INTRO}}</p>
+                    <div class="social-links">
+                        <a href="{{LINKEDIN}}" target="_blank">LinkedIn</a>
+                        <a href="{{GITHUB}}" target="_blank">GitHub</a>
+                        <span id="email-container">
+                            <a href="javascript:void(0)" id="iemail">Email</a>
+                            <span id="demail" class="email-reveal"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section id="projects" class="section">
+            <h2>Projects & Research</h2>
+            {{PROJECTS}}
+        </section>
+
+        <section id="education" class="section">
+            <h2>Education</h2>
+            {{EDUCATION}}
+        </section>
+
+        <section id="skills" class="section">
+            <h2>Technical Skills</h2>
+            <div class="skills-container">
+                {{SKILLS}}
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <h2>About</h2>
+            <div class="about-content">
+                <p>{{ABOUT_PERSONAL}}</p>
+                <div class="interests">
+                    <br>
+                    <h3>Research Interests</h3>
+                    <p>{{RESEARCH_INTERESTS_LIST}}</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p style="color: var(--fg-light); font-size: 0.8em; margin-top: 8em;">&copy; {{YEAR}} {{NAME}}</p>
+        </footer>
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

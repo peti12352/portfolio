@@ -4,7 +4,7 @@ package-lock.json
 
 # Build output
 public/
-index.html
+/index.html
 
 # Environment variables
 .env
