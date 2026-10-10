@@ -13,7 +13,7 @@ export const content: SiteContent = {
     linkedin: "https://www.linkedin.com/in/peter-tallosy/",
     email: "peter@tallosy.hu",
   },
-  bio: `I'm a physicist. Right now I work on making inference faster at ${a("https://meshapplied.com", "mesh.applied")}, and on my thesis about silicon oxide memristors in the Halbritter group at BME.
+  bio: `I'm a physicist. I work on making inference faster at ${a("https://meshapplied.com", "mesh.applied")}. My thesis is on silicon oxide memristors, in the Halbritter group at BME.
 
 Before this I did some experimental nanophysics, got third place at the national TDK in 2022 with an astronomy image processing project, and tested EEG hardware at Zeto.`,
 
