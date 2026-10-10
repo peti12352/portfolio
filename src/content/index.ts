@@ -13,9 +13,9 @@ export const content: SiteContent = {
     linkedin: "https://www.linkedin.com/in/peter-tallosy/",
     email: "peter@tallosy.hu",
   },
-  bio: `I'm doing a physics engineering degree at BME and will finish in 2027. Most of my time goes to ${a("https://meshapplied.com", "mesh.applied")}, where I work on making inference faster, and to my thesis on silicon oxide memristors in the Halbritter group.
+  bio: `I'm a physicist. Right now I work on making inference faster at ${a("https://meshapplied.com", "mesh.applied")}, and on my thesis about silicon oxide memristors in the Halbritter group at BME.
 
-I came to this from physics. I did some experimental nanophysics, got third place at the national TDK in 2022 with an astronomy image processing project, and before that tested EEG hardware at Zeto.`,
+Before this I did some experimental nanophysics, got third place at the national TDK in 2022 with an astronomy image processing project, and tested EEG hardware at Zeto.`,
 
   now: [
     {
