@@ -24,7 +24,7 @@ Before this I did some experimental nanophysics, got third place at the national
       link: "https://meshapplied.com",
       body: `Matteo, Janos and I run mesh.applied. We speed up inference for one particular task rather than for LLMs in general. We closed our first deal, and the three of us will be in San Francisco for the next two months.
 
-I write inference kernels and speculative drafters, and I run the benchmarks for them.
+I write inference kernels and speculative drafters.
 
 Latest number. On one RTX 5090, a 27B model in NVFP4 with the DFlash2 drafter generates 239 tokens/s for a single stream. With MTP3 it generates 174. I got these by replaying traces from seven real SWE-agent sessions. Agent traffic has long contexts and a lot of reasoning tokens, so I didn't want to benchmark on chat prompts. Seven sessions is small, so treat it as a result on those traces.`,
     },
