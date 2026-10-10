@@ -30,7 +30,7 @@
 
         <main>
             <section class="block">
-                <div class="prose"><p>I am a physicist by training: B.Sc. in physics engineering at BME, finishing in 2027. These days I am also a research engineer. I work on <a href="https://meshapplied.com" target="_blank" rel="noopener">mesh.applied</a>, where we make inference faster for specific tasks, and my thesis is on silicon oxide memristors in the Halbritter group.</p><p>Earlier I did experimental nanophysics, took third place at the national TDK in physics (2022, image processing for astronomy), and built test rigs for medical EEG hardware at Zeto.</p></div>
+                <div class="prose"><p>I'm doing a physics engineering degree at BME and will finish in 2027. Most of my time goes to <a href="https://meshapplied.com" target="_blank" rel="noopener">mesh.applied</a>, where I work on making inference faster, and to my thesis on silicon oxide memristors in the Halbritter group.</p><p>I came to this from physics. I did some experimental nanophysics, got third place at the national TDK in 2022 with an astronomy image processing project, and before that tested EEG hardware at Zeto.</p></div>
             </section>
 
             <section class="block">
@@ -38,12 +38,12 @@
                 
     <article class="entry">
       <h3 class="entry-title"><a href="https://meshapplied.com" rel="noopener">mesh.applied</a> <span class="muted">(2026 to present)</span></h3>
-      <div class="prose"><p>mesh.applied is three of us: Matteo, Janos and me. We make inference faster for one task or domain at a time instead of for models in general. We closed our first deal, and the team will be in San Francisco for the next two months.</p><p>My part is the decode path: kernels, speculative drafters, and the benchmarks that tell us whether a change actually helped.</p><p>The number I trust most right now: a 27B model in NVFP4 with the DFlash2 drafter decodes at 239 tokens/s for a single stream on one RTX 5090. The same model with MTP3 gets 174. I measured this by replaying traces from seven real SWE-agent sessions, because agent traffic is long contexts and a lot of hidden reasoning, and drafters behave differently there than on chat prompts. Seven sessions is a small sample, so read it as a result on those traces and not as a general claim.</p></div>
+      <div class="prose"><p>Matteo, Janos and I run mesh.applied. We speed up inference for one particular task rather than for LLMs in general. We closed our first deal, and the three of us will be in San Francisco for the next two months.</p><p>I work on decoding: kernels and speculative drafters, mostly, plus the benchmarks that tell us whether a change did anything.</p><p>Latest number. On one RTX 5090, a 27B model in NVFP4 with the DFlash2 drafter generates 239 tokens/s for a single stream. With MTP3 it generates 174. I got these by replaying traces from seven real SWE-agent sessions. Agent traffic has long contexts and a lot of reasoning tokens, so I didn't want to benchmark on chat prompts. Seven sessions is small, so treat it as a result on those traces.</p></div>
     </article>
 
     <article class="entry">
       <h3 class="entry-title"><a href="https://growmesh.io" rel="noopener">mesh.</a> <span class="muted">(co-founder, 2023 to present)</span></h3>
-      <div class="prose"><p>mesh. is a community of builders and hackers in Budapest. I co-founded it in 2023. Today I run the research and projects side of it, which mostly means mentoring people.</p></div>
+      <div class="prose"><p>mesh. is a builder and hacker community in Budapest. I co-founded it in 2023 and now look after the research and projects side, which mostly means mentoring.</p></div>
     </article>
             </section>
 
@@ -52,12 +52,12 @@
                 
     <article class="entry">
       <h3 class="entry-title">Resistive switching in SiOx <span class="muted">(B.Sc. thesis, BME, 2024 to 2026)</span></h3>
-      <div class="prose"><p>My thesis in the Halbritter group is about how a thin silicon oxide film changes its resistance when you push current through it. I am testing one picture, where conducting paths come from oxygen vacancies percolating through the oxide, against a more filament-like one, and comparing both with the resistance noise measured in the lab.</p><p>The simulation chain starts with a melt-quenched glass in LAMMPS with a machine-learned potential. On top of that sits a resistor network on the vacancy sites, and on top of that a kinetic Monte Carlo model of filament growth with Joule heating.</p><p>It is still early. One result so far: for one choice of barrier parameters I ran 30 seeds at each of 7 bias levels. Filaments grew at every bias, but only the low-bias ones survived. At 0.5 to 1.0 V all 30 runs ended with a stable filament, and at 2.5 V and above none did. The model does not match the measured noise well yet. It is off by about as much as the simpler static fit it was built from (R² of 0.53), so that gap is not new.</p></div>
+      <div class="prose"><p>My thesis is about how a thin film of silicon oxide switches its resistance when you push current through it. There are two competing explanations. In one, the conducting path forms from oxygen vacancies percolating through the oxide. The other is a more filament-like picture. I'm trying to find out which one reproduces the resistance noise measured in the lab.</p><p>The simulation is a stack. LAMMPS with a machine-learned potential makes the glass, a resistor network sits on its vacancy sites, and on top of that a kinetic Monte Carlo model grows filaments with Joule heating.</p><p>It's early. One result: for one choice of barrier parameters I ran 30 seeds at each of 7 bias levels. Filaments grew at every bias but only survived at low bias. All 30 runs were stable at 0.5 to 1.0 V, and none were at 2.5 V or above. Against the measured noise the model is still off, by roughly as much as the static fit it starts from (R² of 0.53).</p></div>
     </article>
 
     <article class="entry">
       <h3 class="entry-title">Generative LEGO <span class="muted">(2025, restarted 2026)</span></h3>
-      <div class="prose"><p>Text or a photo in, a buildable LEGO model out: parts list, structure, instructions. It builds on BrickNet from CVPR 2026. I first tried this in 2025 and restarted it this year, with LLM-generated captions and, in the last few weeks, diffusion-style generation.</p><p>The results are not good yet. The best recipe is still the unmodified BrickNet checkpoint with best-of-8 sampling, a judge that picks between candidates, and a physical-validity check. A fine-tuned model I had reported as better did not survive a re-check, so I retracted it. Nothing in the pipeline yet checks whether a generated model would stand up under gravity. The research log has every number and every mistake.</p></div>
+      <div class="prose"><p>The goal is text or a photo in, a LEGO model you can build out. It's based on BrickNet (CVPR 2026). I first tried this in 2025 and restarted it this year, with LLM captions and lately diffusion-based generation.</p><p>It doesn't work well yet. The best setup is still the stock BrickNet checkpoint with 8 samples per prompt, a judge to pick the best one, and a check for collisions and loose bricks. I once reported a fine-tuned model as better, then re-checked and retracted it. Nothing tests yet whether a result would stand up under gravity. The details are in the research log.</p></div>
     </article>
             </section>
 
@@ -66,12 +66,12 @@
                 
     <article class="entry">
       <h3 class="entry-title"><a href="https://badcompany.xyz" rel="noopener">Lilith</a> <span class="muted">(BadCompany, CTO, 2025 to 2026)</span></h3>
-      <div class="prose"><p>Lilith was a security layer for AI agents. An agent that can call tools can be talked into things you did not intend, and checking inside the agent does not help, because the agent is the thing under attack. So the rules lived outside it. Every tool call was checked against a policy written in Cedar, and on Linux the same policy was enforced in the kernel, so a compromised agent still could not open files or reach hosts it was not allowed to. We delivered it in 2025 and 2026, wrote it up on <a href="https://badcompany.xyz" target="_blank" rel="noopener">badcompany.xyz</a>, and the project is finished.</p></div>
+      <div class="prose"><p>At BadCompany I was CTO and we built Lilith, a security product for AI agents. The trouble with agents that call tools is that someone can talk them into things you never wanted, and a check inside the agent doesn't help much, because the agent is what's being attacked. So we put the rules outside it. Each tool call was checked against a Cedar policy, and on Linux the kernel enforced the same policy, so even a compromised agent couldn't open files or reach hosts it wasn't allowed to. We delivered it over 2025 and 2026 and wrote it up on <a href="https://badcompany.xyz" target="_blank" rel="noopener">badcompany.xyz</a>. It's finished.</p></div>
     </article>
 
     <article class="entry">
-      <h3 class="entry-title">Test engineering <span class="muted">(Zeto, 2021)</span></h3>
-      <div class="prose"><p>Test rigs for medical EEG and ECG hardware: signal paths, timing, and automated tests in C on embedded Linux.</p></div>
+      <h3 class="entry-title">Zeto <span class="muted">(2021)</span></h3>
+      <div class="prose"><p>I built test rigs for medical EEG and ECG hardware, with automated tests in C on embedded Linux.</p></div>
     </article>
             </section>
 
@@ -80,12 +80,12 @@
                 
     <article class="entry">
       <h3 class="entry-title"><a href="https://medium.com/@peter_48867/deterministic-agent-security-at-ms-scale-lilith-zero-ab6bff4c3ff0" rel="noopener">Deterministic agent security at ms-scale: Lilith-Zero</a> <span class="muted">(Medium)</span></h3>
-      <div class="prose"><p>How the open source version checks every MCP tool call, and why it fails closed.</p></div>
+      <div class="prose"><p>About lilith-zero: how it checks MCP tool calls, and why it denies by default when something goes wrong.</p></div>
     </article>
 
     <article class="entry">
       <h3 class="entry-title"><a href="https://github.com/meshapplied/Goethe#readme" rel="noopener">Goethe README</a> <span class="muted">(GitHub)</span></h3>
-      <div class="prose"><p>The design notes for our ternary mixture-of-experts runtime.</p></div>
+      <div class="prose"><p>Design notes for our ternary mixture-of-experts runtime.</p></div>
     </article>
             </section>
 
@@ -94,7 +94,7 @@
                 
     <article class="entry">
       <h3 class="entry-title"><a href="https://luma.com/1dyc02te" rel="noopener">Claude Code for Security</a> <span class="muted">(Claude Community Budapest, May 2026)</span></h3>
-      <div class="prose"><p>Policy engines and kernel-level enforcement for AI agents.</p></div>
+      <div class="prose"><p>On policy engines and kernel enforcement for AI agents.</p></div>
     </article>
             </section>
 
@@ -103,27 +103,27 @@
                 
     <article class="entry">
       <h3 class="entry-title"><a href="https://github.com/peti12352/gpu-waterz" rel="noopener">gpu-waterz</a> <span class="muted">(CUDA)</span></h3>
-      <div class="prose"><p>A GPU version of waterz, the tool connectomics pipelines use to turn predicted affinities into labelled cells. I built it so that large volumes fit on a 24 GB 3090, then made it fast, and I wanted a CPU alternative as well. On a 5090 it segments a 2.16 billion voxel volume in 3.1 seconds, with segmentation quality (VOI) within 0.02 of stock waterz. Merging is a parallel approximation of the sequential algorithm.</p><p>The hardest part was getting the same answer twice. Agglomeration merges regions by the mean of the affinities on their shared boundary, and I summed those with float atomic adds. Float addition is not associative and the GPU adds in whatever order threads arrive, so two identical runs disagreed on about 740,000 of 7.5 million edges, which flips merge decisions and changes the labels. I switched to fixed-point integer accumulation. Integer addition does not care about order, and now the output is byte-identical from run to run.</p></div>
+      <div class="prose"><p>waterz turns a network's predicted affinities into labelled cells for connectomics. This is a GPU version of it. I wanted three things: big volumes that fit on a 24 GB 3090, speed, and a CPU alternative. On a 5090 it handles a 2.16 billion voxel volume in 3.1 seconds, with segmentation quality (VOI) within 0.02 of stock waterz. The merging is a parallel approximation of the sequential algorithm.</p><p>The hard part was getting the same answer twice. Regions get merged by the mean affinity along their shared boundary, and I was summing those with float atomic adds. Float addition isn't associative and the GPU adds in whatever order threads arrive, so two identical runs disagreed on about 740,000 of 7.5 million edges. That flips merge decisions and changes the labels. Switching to fixed-point integer accumulation fixed it. Integer addition doesn't care about order, so the output is now byte-identical on every run.</p></div>
     </article>
 
     <article class="entry">
       <h3 class="entry-title"><a href="https://github.com/peti12352/lean-interval-bounds" rel="noopener">lean-interval-bounds</a> <span class="muted">(Lean 4)</span></h3>
-      <div class="prose"><p>Tactics that prove bounds on exp, log, sin and cos in Lean 4 with Mathlib. There is an <code>approx</code> tactic and a <code>norm_num</code> extension, and every result is checked by the Lean kernel, so you do not have to trust any floating point.</p></div>
+      <div class="prose"><p>Tactics for proving bounds on exp, log, sin and cos in Lean 4 with Mathlib: an <code>approx</code> tactic and a <code>norm_num</code> extension. The Lean kernel checks every proof, so no floating point is trusted.</p></div>
     </article>
 
     <article class="entry">
       <h3 class="entry-title"><a href="https://github.com/meshapplied/Goethe" rel="noopener">Goethe</a> <span class="muted">(meshapplied)</span></h3>
-      <div class="prose"><p>A ternary mixture-of-experts runtime for SGLang. It also holds our NVFP4 kernels.</p></div>
+      <div class="prose"><p>Our ternary mixture-of-experts runtime for SGLang. The NVFP4 kernels live there too.</p></div>
     </article>
 
     <article class="entry">
       <h3 class="entry-title"><a href="https://github.com/BadC-mpany/lilith-zero" rel="noopener">lilith-zero</a> <span class="muted">(BadCompany, Rust)</span></h3>
-      <div class="prose"><p>The open source, userspace version of Lilith. It is Rust middleware that checks MCP tool calls against a policy and fails closed when anything is off. It is lighter than the kernel-level product and runs entirely in userspace.</p></div>
+      <div class="prose"><p>The open source, userspace version of Lilith. It's Rust middleware that checks MCP tool calls against a policy and denies by default when something goes wrong. It's lighter than the kernel product.</p></div>
     </article>
 
     <article class="entry">
       <h3 class="entry-title"><a href="https://growmesh.io" rel="noopener">growmesh.io</a> <span class="muted">(mesh.)</span></h3>
-      <div class="prose"><p>The site of the Budapest builder community.</p></div>
+      <div class="prose"><p>The website of mesh., the Budapest builder community.</p></div>
     </article>
                 <div id="gh-graph" data-user="peti12352"></div>
                 <p class="gh-caption">contributions, last 12 months</p>
