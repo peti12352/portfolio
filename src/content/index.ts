@@ -4,12 +4,12 @@ export const content: SiteContent = {
   personal: {
     name: "Peter Tallosy",
     title: "Physics engineering student",
-    intro: "Inference kernels and numerical physics. Hungary.",
-    bio: `I run benchmarks on local LLM decode: NVFP4 on a 5090, speculative drafting (MTP, DFlash2), long contexts with tool calls. I log acceptance length and tok/s on replayed SWE agent traces.
+    intro: "I like fast code on real hardware.",
+    bio: `I study physics engineering at BME and spend most of my free time on ML inference: how fast you can run a useful model on a single GPU when the workload looks like a coding agent (long threads, tools, lots of hidden reasoning). I measure before I claim.
 
-BSc at BME, Budapest. Thesis: SiOx memristor noise (LAMMPS + MLIP, compare to lab spectra). Earlier project: 3D quantum percolation in JAX.
+Thesis work is on SiOx memristors with the Halbritter group: simulations, noise, comparing to what we see in the lab.
 
-Co-founded <a href="https://growmesh.io" target="_blank" rel="noopener">mesh.</a> in Budapest.`,
+I co-founded <a href="https://growmesh.io" target="_blank" rel="noopener">mesh.</a>, a small builder space in Budapest.`,
     location: "Hungary",
     social: {
       linkedin: "https://linkedin.com/in/peter-tallosy",
@@ -19,11 +19,11 @@ Co-founded <a href="https://growmesh.io" target="_blank" rel="noopener">mesh.</a
   },
   projects: [
     {
-      title: "Local inference",
+      title: "Inference on a home GPU",
       organization: "personal",
       timespan: "2025 to present",
       description:
-        "Scripts and notes under my GitHub: agent replay on Qwen3.8-27B NVFP4, batch curves, MTP vs DFlash2 on thinking output. Working on kernels and draft/verify paths for coding agents.",
+        "I have an RTX 5090 and use it to stress-test decode for Qwen-scale models: speculative drafting, batching when several agent sessions run at once, and whether the faster path still matches greedy output. Code and notes are on GitHub.",
       link: "https://github.com/peti12352"
     },
     {
@@ -32,48 +32,38 @@ Co-founded <a href="https://growmesh.io" target="_blank" rel="noopener">mesh.</a
       timespan: "2025 to 2026",
       link: "https://badcompany.xyz",
       description:
-        "Agent security on Linux: policy on each tool call (Cedar), enforcement in the kernel (seccomp, Landlock, BPF-LSM, egress rules). Earlier <a href=\"https://github.com/BadC-mpany/lilith-zero\" target=\"_blank\" rel=\"noopener\">Lilith-Zero</a> was MCP middleware in Rust, fail-closed, checked with Kani. Shipped and discontinued; I stopped working on it in 2026.",
-      timeline: [
-        {
-          date: "2025",
-          description: "Lilith-Zero, MCP path."
-        },
-        {
-          date: "2026",
-          description: "Kernel enforcer + policy engine; write-up on badcompany.xyz."
-        }
-      ]
+        "With BadCompany I built agent security that does not trust the process: policies on tool calls, enforcement in the kernel so a compromised agent cannot just ignore the rules. We shipped it, wrote it up on <a href=\"https://badcompany.xyz\" target=\"_blank\" rel=\"noopener\">badcompany.xyz</a>, and discontinued the product line in 2026. The earlier <a href=\"https://github.com/BadC-mpany/lilith-zero\" target=\"_blank\" rel=\"noopener\">Lilith-Zero</a> prototype was Rust middleware on MCP.",
     },
     {
       title: "Co-founder",
       organization: "mesh.",
       timespan: "2023 to present",
       link: "https://growmesh.io",
-      description: "Builder workspace in Budapest."
+      description: "A physical place in Budapest for people who want to build things and hold each other to it."
     },
     {
       title: "Hardware",
       organization: "Zeto",
       timespan: "2021",
-      description: "ECG/EEG signal emulation, C tests on embedded Linux."
+      description: "Test rigs for medical EEG/ECG hardware: signal paths, timing, automated tests in C on embedded Linux."
     }
   ],
   research: [
     {
-      title: "SiOx memristors (thesis)",
-      organization: "BME",
+      title: "SiOx memristors",
+      organization: "BME, thesis",
       timespan: "2024 to 2026",
       description:
-        "MD with a machine-learned potential (LAMMPS, Zongo MTP) on SiOx switching. Compare resistance noise to measurements from the Halbritter group. Filament structure from snapshots, simple 1/f models.",
+        "Atomistic simulations of resistive switching in silicon oxide. The open question is which picture fits the lab data better: filament growth or vacancy percolation. I compare simulated resistance noise to measured spectra and keep the models honest about what they can explain.",
     },
     {
       title: "3D quantum percolation",
       organization: "personal",
       timespan: "2025",
       description:
-        "Transfer-matrix Lyapunov exponents, JAX/CUDA, QR stabilization. Site dilution at E = 3.1t: p<sub>q</sub> = 0.517 ± 0.005 with FSS on M in {10, 12}. Checked Anderson disorder against Slevin & Ohtsuki (ν ≈ 1.62).",
+        "Numerical study of site dilution on a 3D tight-binding model (transfer matrices, Lyapunov exponents, finite-size scaling). Main number: p<sub>q</sub> ≈ 0.517 at E = 3.1t. I used JAX on a GPU because the parameter sweeps are painful on a CPU.",
       highlights: [
-        "GPU: on-the-fly disorder, JAX Gram-Schmidt"
+        "Cross-checked against Slevin & Ohtsuki on Anderson localization in the same pipeline"
       ]
     }
   ],
@@ -82,13 +72,13 @@ Co-founded <a href="https://growmesh.io" target="_blank" rel="noopener">mesh.</a
       title: "B.Sc. Physics Engineering",
       organization: "BME",
       timespan: "2023 to 2027",
-      description: "Nanotechnology and quantum applications."
+      description: "Nanotechnology and quantum applications track."
     },
     {
-      title: "National TDK, physics, 3rd place",
+      title: "National TDK, physics",
       organization: "Hungary",
       timespan: "2022",
-      description: "Astronomical image processing."
+      description: "3rd place. Image processing for astronomy."
     },
     {
       title: "Maturity exam",
