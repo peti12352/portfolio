@@ -4,8 +4,8 @@
   "description": "Personal portfolio website",
   "main": "index.js",
   "scripts": {
-    "build": "ts-node scripts/build.ts",
-    "dev": "nodemon --watch src --watch templates --ext ts,html --exec 'npm run build'"
+    "build": "bun scripts/build.ts",
+    "dev": "bunx nodemon --watch src --watch templates --ext ts,html --exec 'bun scripts/build.ts'"
   },
   "dependencies": {
     "html-minifier": "^4.0.0"

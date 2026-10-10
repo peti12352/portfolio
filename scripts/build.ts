@@ -2,115 +2,130 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { minify } from 'html-minifier';
 import { content } from '../src/content';
-import { Project, Education, Skill, ResearchInterest } from '../src/types/content';
+import { Project, Research, MiscItem } from '../src/types/content';
 
 const OUTPUT_DIR = 'public';
 const TEMPLATE_PATH = path.join(__dirname, '..', 'templates', 'base.html');
 
-function generateProjects(projects: Project[]): string {
-  return projects.map(p => `
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-title">${p.title} <span class="entry-org">@ ${p.organization}</span></div>
-        <div class="entry-date">${p.timespan.replace('Present', 'to date')}</div>
-      </div>
-      <div class="entry-desc">
-        ${p.description || ''}
-        ${p.timeline ? `
-          <div class="timeline-list">
-            ${p.timeline.map(t => `
-              <div class="timeline-item">
-                <span class="timeline-date">${t.date.replace('Present', 'to date')}</span>
-                ${t.description}
-              </div>
-            `).join('')}
-          </div>
-        ` : ''}
-      </div>
-    </div>
-  `).join('');
+function entryHtml(
+  title: string,
+  org: string,
+  when: string,
+  body: string,
+  link?: string
+): string {
+  const head = link
+    ? `<a href="${link}" rel="noopener">${title}</a>`
+    : title;
+  return `
+    <article class="entry">
+      <h3 class="entry-title">${head} <span class="muted">(${org}, ${when})</span></h3>
+      <div class="prose">${body}</div>
+    </article>`;
 }
 
-function generateEducation(education: Education[]): string {
-  return education.map(e => `
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-title">${e.degree}</div>
-        <div class="entry-date">${e.timespan}</div>
-      </div>
-      <div class="entry-desc">
-        ${e.institution}. ${e.description || ''}
-      </div>
-    </div>
-  `).join('');
+function projectEntry(p: Project): string {
+  let body = p.description;
+  if (p.timeline?.length) {
+    body += `<ul class="timeline">${p.timeline
+      .map((t) => `<li><strong>${t.date}</strong> ${t.description}</li>`)
+      .join('')}</ul>`;
+  }
+  return entryHtml(p.title, p.organization, p.timespan.replace('Present', 'present'), body, p.link);
 }
 
-function generateSkills(skills: Record<string, Skill>): string {
-  return Object.values(skills).map(s => `
-    <div class="skill-cat">
-      <h3>${s.title}</h3>
-      <div class="skill-list">
-        ${s.content ? s.content.replace(/\n/g, '<br>') : ''}
-        ${s.items ? s.items.map(i => `${i.language} (${i.level})`).join(', ') : ''}
-      </div>
-    </div>
-  `).join('');
+function generateResearch(research: Research[]): string {
+  return research
+    .map((r) => {
+      let body = r.description;
+      if (r.highlights?.length) {
+        body += `<ul>${r.highlights.map((h) => `<li>${h}</li>`).join('')}</ul>`;
+      }
+      return entryHtml(r.title, r.organization, r.timespan.replace('Present', 'present'), body, r.link);
+    })
+    .join('\n');
+}
+
+function generateMisc(misc: MiscItem[]): string {
+  return misc
+    .map((m) =>
+      entryHtml(
+        m.title,
+        m.organization || '',
+        m.timespan,
+        m.description
+      )
+    )
+    .join('\n');
 }
 
 async function build() {
   console.log('Building portfolio...');
-  try {
-    const template = fs.readFileSync(TEMPLATE_PATH, 'utf-8');
+  const template = fs.readFileSync(TEMPLATE_PATH, 'utf-8');
 
-    const replacements: Record<string, string> = {
-      '{{NAME}}': content.personal.name,
-      '{{INTRO}}': content.personal.intro,
-      '{{PROJECTS}}': generateProjects(content.projects),
-      '{{EDUCATION}}': generateEducation(content.education),
-      '{{SKILLS}}': generateSkills(content.skills),
-      '{{ABOUT_PERSONAL}}': content.about.personal,
-      '{{RESEARCH_INTERESTS_LIST}}': content.about.research_interests.map(i => typeof i === 'string' ? i : i.title).join(', '),
-      '{{LINKEDIN}}': content.personal.social.linkedin || '#',
-      '{{GITHUB}}': content.personal.social.github || '#',
-      '{{YEAR}}': new Date().getFullYear().toString(),
-    };
+  const nowProjects = content.projects.filter((p) =>
+    p.title.toLowerCase().includes('inference')
+  );
+  const workProjects = content.projects.filter((p) => !nowProjects.includes(p));
 
-    let html = template;
-    for (const [placeholder, value] of Object.entries(replacements)) {
-      html = html.split(placeholder).join(value);
-    }
+  const replacements: Record<string, string> = {
+    '{{NAME}}': content.personal.name,
+    '{{INTRO}}': content.personal.intro,
+    '{{BIO}}': content.personal.bio,
+    '{{PROJECTS_NOW}}': nowProjects.map(projectEntry).join('\n'),
+    '{{PROJECTS_WORK}}': workProjects.map(projectEntry).join('\n'),
+    '{{RESEARCH}}': generateResearch(content.research),
+    '{{MISC}}': generateMisc(content.misc),
+    '{{LINKEDIN}}': content.personal.social.linkedin || '#',
+    '{{GITHUB}}': content.personal.social.github || '#',
+    '{{EMAIL}}': content.personal.social.email || '',
+    '{{GITHUB_USER}}': 'peti12352',
+    '{{YEAR}}': new Date().getFullYear().toString(),
+  };
 
-    const minifiedHtml = minify(html, {
-      collapseWhitespace: true,
-      removeComments: true,
-      minifyJS: true,
-      minifyCSS: true,
-    });
-
-    if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR);
-    fs.writeFileSync(path.join(OUTPUT_DIR, 'index.html'), minifiedHtml);
-    fs.writeFileSync(path.join(__dirname, '..', 'index.html'), html);
-
-    const copyDir = (src: string, dest: string) => {
-      if (!fs.existsSync(src)) return;
-      if (!fs.existsSync(dest)) fs.mkdirSync(dest, { recursive: true });
-      fs.readdirSync(src).forEach(file => {
-        const s = path.join(src, file);
-        const d = path.join(dest, file);
-        if (fs.lstatSync(s).isDirectory()) copyDir(s, d);
-        else fs.copyFileSync(s, d);
-      });
-    };
-
-    copyDir('css', `${OUTPUT_DIR}/css`);
-    copyDir('js', `${OUTPUT_DIR}/js`);
-    copyDir('assets', `${OUTPUT_DIR}/assets`);
-
-    console.log('Done.');
-  } catch (e) {
-    console.error(e);
-    process.exit(1);
+  let html = template;
+  for (const [placeholder, value] of Object.entries(replacements)) {
+    html = html.split(placeholder).join(value);
   }
+
+  const minifiedHtml = minify(html, {
+    collapseWhitespace: true,
+    removeComments: true,
+    minifyJS: true,
+    minifyCSS: true,
+  });
+
+  if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR);
+  fs.writeFileSync(path.join(OUTPUT_DIR, 'index.html'), minifiedHtml);
+  fs.writeFileSync(path.join(__dirname, '..', 'index.html'), html);
+
+  const copyDir = (src: string, dest: string) => {
+    if (!fs.existsSync(src)) return;
+    if (!fs.existsSync(dest)) fs.mkdirSync(dest, { recursive: true });
+    fs.readdirSync(src).forEach((file) => {
+      const s = path.join(src, file);
+      const d = path.join(dest, file);
+      if (fs.lstatSync(s).isDirectory()) copyDir(s, d);
+      else fs.copyFileSync(s, d);
+    });
+  };
+
+  copyDir('css', `${OUTPUT_DIR}/css`);
+  copyDir('js', `${OUTPUT_DIR}/js`);
+  copyDir('assets', `${OUTPUT_DIR}/assets`);
+
+  // Replace iframe wrapper on apex domain when deployed to peter.tallosy.hu
+  fs.writeFileSync(
+    path.join(OUTPUT_DIR, 'DEPLOY_APEX.txt'),
+    `Serve this public/ directory at https://peter.tallosy.hu/ (no iframe).\n` +
+      `Remove the old iframe page that pointed at portfolio-vert-six-70.vercel.app.\n` +
+      `Optional: CNAME peter.tallosy.hu to Vercel and set root to public/.\n`
+  );
+
+  console.log('Done.');
 }
 
-build();
+build().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});

@@ -3,9 +3,14 @@ import { SiteContent } from '../types/content';
 export const content: SiteContent = {
   personal: {
     name: "Peter Tallosy",
-    title: "CTO & Physics Engineering Student",
-    intro: "Physics-trained engineer and CTO specializing in AI-native systems, neuromorphic hardware, and formal verification. Currently building Bad Company, focusing on cryptographically secure agentic frameworks and autonomous infrastructure. Leveraging multi-physics simulation and machine learning to bridge the gap between hardware dynamics and verified AI behavior.",
-    location: "Budapest, Hungary",
+    title: "Physics engineering student",
+    intro: "Inference kernels and numerical physics. Hungary.",
+    bio: `I run benchmarks on local LLM decode: NVFP4 on a 5090, speculative drafting (MTP, DFlash2), long contexts with tool calls. I log acceptance length and tok/s on replayed SWE agent traces.
+
+BSc at BME, Budapest. Thesis: SiOx memristor noise (LAMMPS + MLIP, compare to lab spectra). Earlier project: 3D quantum percolation in JAX.
+
+Co-founded <a href="https://growmesh.io" target="_blank" rel="noopener">mesh.</a> in Budapest.`,
+    location: "Hungary",
     social: {
       linkedin: "https://linkedin.com/in/peter-tallosy",
       github: "https://github.com/peti12352",
@@ -14,112 +19,100 @@ export const content: SiteContent = {
   },
   projects: [
     {
-      title: "CTO & Co-founder",
-      organization: "Bad Company",
-      timespan: "Dec 2023 – Present",
-      icon: "assets/mesh.jfif",
-      link: "https://growmesh.io",
-      description: "Born from the <strong>mesh.</strong> builder community. Architecting the infrastructure for a safe, agentic future. Developing <strong>Sentinel</strong>, a Rust-based secure MCP framework with end-to-end encrypted tool-call interception and cryptographically enforced capability systems.",
+      title: "Local inference",
+      organization: "personal",
+      timespan: "2025 to present",
+      description:
+        "Scripts and notes under my GitHub: agent replay on Qwen3.8-27B NVFP4, batch curves, MTP vs DFlash2 on thinking output. Working on kernels and draft/verify paths for coding agents.",
+      link: "https://github.com/peti12352"
+    },
+    {
+      title: "Lilith",
+      organization: "BadCompany",
+      timespan: "2025 to 2026",
+      link: "https://badcompany.xyz",
+      description:
+        "Agent security on Linux: policy on each tool call (Cedar), enforcement in the kernel (seccomp, Landlock, BPF-LSM, egress rules). Earlier <a href=\"https://github.com/BadC-mpany/lilith-zero\" target=\"_blank\" rel=\"noopener\">Lilith-Zero</a> was MCP middleware in Rust, fail-closed, checked with Kani. Shipped and discontinued; I stopped working on it in 2026.",
       timeline: [
         {
-          date: "Dec 2025 – Present",
-          description: "<strong>Research Lead @ AI-Native Systems:</strong> Exploration of formal verification for AI-generated code. Designing semantic filesystems and OS-level abstractions to constrain and verify agentic behavior."
+          date: "2025",
+          description: "Lilith-Zero, MCP path."
         },
         {
-          date: "Sep 2025 – Jan 2026",
-          description: "<strong>Sentinel</strong>: high-performance Rust proxy for agentic verification."
-        },
-        {
-          date: "May 2025 – Oct 2025",
-          description: "Pivoted from red-teaming games to enterprise-grade agentic security products."
+          date: "2026",
+          description: "Kernel enforcer + policy engine; write-up on badcompany.xyz."
         }
       ]
     },
     {
-      title: "Research Assistant",
-      organization: "BME Institute of Physics",
-      timespan: "June 2024 – Present",
-      icon: "assets/nano.png",
-      description: "<strong>Neuromorphic Hardware & Memristors:</strong> Developed a multi-scale simulation stack for SiO₂/SiOₓ resistive-switching devices. Modeling filament formation and switching dynamics to enable energy-efficient, hardware-native neural network designs.",
-      link: "#"
+      title: "Co-founder",
+      organization: "mesh.",
+      timespan: "2023 to present",
+      link: "https://growmesh.io",
+      description: "Builder workspace in Budapest."
     },
     {
-      title: "Lead Developer",
-      organization: "Generative CAD",
-      timespan: "2025",
-      icon: "assets/mesh.jfif",
-      description: "Created a text-to-LEGO pipeline using a coordinate-free model description language for autoregressive build generation. Integrated automated brick detection and library management."
-    },
-    {
-      title: "Member",
-      organization: "mesh",
-      timespan: "2023 – Present",
-      icon: "assets/mesh.jfif",
-      description: "Part of the <strong>mesh</strong> builder space community, a collaborative environment fueling innovation and from which Bad Company emerged."
-    },
-    {
-      title: "ML Architect",
-      organization: "Large-scale Optimization",
-      timespan: "2024",
-      icon: "assets/location.svg",
-      description: "Deployment of a distributed optimization framework with resource-aware scheduling and reproducible execution for production-scale ML workloads."
-    },
-    {
-      title: "Hardware Developer",
-      organization: "ZetoEU",
+      title: "Hardware",
+      organization: "Zeto",
       timespan: "2021",
-      icon: "assets/zeto.png",
-      description: "Engineering medical-grade ECG/EEG simulation hardware. Built an automated C test suite on Raspberry Pi to verify signal integrity and timing reliability."
-    },
-    {
-      title: "Winner / 3rd Place",
-      organization: "TDK Physics Research",
-      timespan: "2022",
-      icon: "assets/tdk.jpg",
-      description: "Researched and implemented false-color processing techniques for astronomical imagery. Published findings and awarded at the national TDK competition."
+      description: "ECG/EEG signal emulation, C tests on embedded Linux."
     }
   ],
-  education: [
+  research: [
     {
-      degree: "B.Sc. in Physics Engineering",
-      institution: "Budapest University of Technology",
-      timespan: "2023 – 2027 (Expected)",
-      icon: "assets/ttk.png",
-      description: "Specializing in Nanotechnology and Quantum Applications. Projects: custom numerical solvers, LLM training on Shakespeare, and C++ library design."
+      title: "SiOx memristors (thesis)",
+      organization: "BME",
+      timespan: "2024 to 2026",
+      description:
+        "MD with a machine-learned potential (LAMMPS, Zongo MTP) on SiOx switching. Compare resistance noise to measurements from the Halbritter group. Filament structure from snapshots, simple 1/f models.",
     },
     {
-      degree: "Maturity Exam",
-      institution: "Piarist School Szeged",
+      title: "3D quantum percolation",
+      organization: "personal",
+      timespan: "2025",
+      description:
+        "Transfer-matrix Lyapunov exponents, JAX/CUDA, QR stabilization. Site dilution at E = 3.1t: p<sub>q</sub> = 0.517 ± 0.005 with FSS on M in {10, 12}. Checked Anderson disorder against Slevin & Ohtsuki (ν ≈ 1.62).",
+      highlights: [
+        "GPU: on-the-fly disorder, JAX Gram-Schmidt"
+      ]
+    }
+  ],
+  misc: [
+    {
+      title: "B.Sc. Physics Engineering",
+      organization: "BME",
+      timespan: "2023 to 2027",
+      description: "Nanotechnology and quantum applications."
+    },
+    {
+      title: "National TDK, physics, 3rd place",
+      organization: "Hungary",
+      timespan: "2022",
+      description: "Astronomical image processing."
+    },
+    {
+      title: "Maturity exam",
+      organization: "Piarist School, Szeged",
       timespan: "2023",
-      icon: "assets/piarista.png",
-      description: "Math & Physics Specialization. Graduated with honors."
+      description: "Math and physics."
     }
   ],
   skills: {
-    core: {
-      title: "Core Expertise",
-      content: "Physics-driven ML · Neuromorphic Hardware · Agentic AI Security · Distributed Optimization · Formal Verification · Rust · C++ · Python"
-    },
-    stack: {
-      title: "Stack",
-      content: "PyTorch · TensorFlow · NumPy · SciPy · OpenCV · LaTeX · Linux · Git · Raspberry Pi / Embedded Systems"
+    technical: {
+      title: "Tools",
+      content: "Python, JAX, CUDA, Rust, C, Linux"
     },
     languages: {
       title: "Languages",
       items: [
-        { language: "Hungarian", level: "Native" },
-        { language: "English", level: "Fluent" },
-        { language: "German", level: "Fluent" }
+        { language: "Hungarian", level: "native" },
+        { language: "English", level: "fluent" },
+        { language: "German", level: "fluent" }
       ]
     }
   },
   about: {
-    intro: "Physics-trained CTO and researcher specializing in AI-native systems and neuromorphic hardware.",
-    personal: "Outside of engineering, I run 5Ks, read Dostoevsky, and brew excessive amounts of coffee and yerba mate. I find inspiration in the intersection of health research and electronic music (Marsh, Air).",
-    research_interests: [
-      "Quantum Information",
-      "Agentic Safety",
-      "Post-CMOS Computing"
-    ]
+    personal: "",
+    research_interests: []
   }
 };

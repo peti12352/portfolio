@@ -1,0 +1,5 @@
+{
+  "buildCommand": "bun scripts/build.ts",
+  "outputDirectory": "public",
+  "installCommand": "bun install"
+}

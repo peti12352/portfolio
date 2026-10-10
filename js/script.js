@@ -1,280 +1,51 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // Theme toggle functionality with optimizations
-  const themeToggle = document.getElementById("theme-toggle");
-  let isThemeTransitioning = false;
+(function () {
+  const el = document.getElementById("gh-graph");
+  if (!el) return;
+  const user = el.dataset.user || "peti12352";
 
-  // Pre-load both themes
-  const preloadThemes = () => {
-    const themes = ["light", "dark"];
-    themes.forEach((theme) => {
-      const tempDiv = document.createElement("div");
-      tempDiv.style.position = "absolute";
-      tempDiv.style.width = "0";
-      tempDiv.style.height = "0";
-      tempDiv.style.opacity = "0";
-      tempDiv.style.pointerEvents = "none";
-      tempDiv.setAttribute("data-theme", theme);
-      document.body.appendChild(tempDiv);
-      setTimeout(() => tempDiv.remove(), 1000);
-    });
-  };
-
-  // Optimized theme application with transition lock
-  const setTheme = (theme) => {
-    if (isThemeTransitioning) return;
-    isThemeTransitioning = true;
-
-    // Use requestAnimationFrame for smooth transition
-    requestAnimationFrame(() => {
-      document.documentElement.setAttribute("data-theme", theme);
-      localStorage.setItem("theme", theme);
-
-      // Reset transition lock after animation completes
-      setTimeout(() => {
-        isThemeTransitioning = false;
-      }, 300); // Match your CSS transition duration
-    });
-  };
-
-  // Check for saved theme preference with system color scheme as fallback
-  const getPreferredTheme = () => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      return savedTheme;
-    }
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-  };
-
-  // Initial setup
-  preloadThemes();
-  setTheme(getPreferredTheme());
-
-  // Optimized theme toggle with debounce
-  let toggleTimeout;
-  themeToggle.addEventListener("click", () => {
-    if (toggleTimeout) clearTimeout(toggleTimeout);
-
-    toggleTimeout = setTimeout(() => {
-      const currentTheme = document.documentElement.getAttribute("data-theme");
-      const newTheme = currentTheme === "dark" ? "light" : "dark";
-      setTheme(newTheme);
-    }, 50);
-  });
-
-  // Optimized system theme change listener
-  const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-  const handleSystemThemeChange = (e) => {
-    if (!localStorage.getItem("theme")) {
-      requestAnimationFrame(() => {
-        setTheme(e.matches ? "dark" : "light");
-      });
-    }
-  };
-
-  // Use newer event listener when available
-  if (mediaQuery.addEventListener) {
-    mediaQuery.addEventListener("change", handleSystemThemeChange);
-  } else {
-    mediaQuery.addListener(handleSystemThemeChange);
-  }
-
-  // Smooth scrolling for navigation links
-  const navLinks = document.querySelectorAll(".nav-links a");
-  navLinks.forEach((link) => {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-      const targetId = this.getAttribute("href");
-      const targetSection = document.querySelector(targetId);
-      if (targetSection) {
-        targetSection.scrollIntoView({ behavior: "smooth" });
-      }
-    });
-  });
-
-  // Debounce function to improve scroll event performance
-  function debounce(func, wait = 20, immediate = true) {
-    let timeout;
-    return function () {
-      const context = this,
-        args = arguments;
-      const later = function () {
-        timeout = null;
-        if (!immediate) func.apply(context, args);
-      };
-      const callNow = immediate && !timeout;
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-      if (callNow) func.apply(context, args);
-    };
-  }
-
-  // Highlight active navigation link based on current scroll position
-  const sections = document.querySelectorAll("section");
-  window.addEventListener(
-    "scroll",
-    debounce(() => {
-      let currentSectionId = "";
-      sections.forEach((section) => {
-        const sectionTop = section.offsetTop - 100; // offset for navbar height
-        if (window.pageYOffset >= sectionTop) {
-          currentSectionId = section.getAttribute("id");
-        }
-      });
-
-      navLinks.forEach((link) => {
-        link.classList.remove("active");
-        if (link.getAttribute("href") === "#" + currentSectionId) {
-          link.classList.add("active");
-        }
-      });
+  fetch("https://github-contributions-api.jogruber.de/v4/" + user + "?y=last")
+    .then(function (r) {
+      return r.json();
     })
-  );
+    .then(function (data) {
+      const rows = data.contributions || [];
+      if (!rows.length) return;
 
-  // Enhanced secure email protection with true encryption
-  const secureEmailProtection = (() => {
-    // Split email into multiple encrypted parts with added noise
-    const key = [...Array(32)]
-      .map(() => Math.random().toString(36)[2])
-      .join("");
-    const noise = "NzU1RTZCMkY4QTNENEMxRTlGMkI3RDRB";
-
-    // Email parts are encrypted and mixed with noise
-    const parts = {
-      n1: "QzJGNzU1RTZCMk=", // Encrypted noise
-      p1: "cGV0ZXI=", // Encrypted 'peter'
-      n2: "Y4QTNENEMxRTl=", // Encrypted noise
-      p2: "dGFsbG9zeQ==", // Encrypted 'tallosy'
-      n3: "RkYjJCN0RDRB", // Encrypted noise
-      p3: "aHU=", // Encrypted 'hu'
-    };
-
-    const assembleEmail = (p1, p2, p3) => {
-      try {
-        return window.atob(p1) + "@" + window.atob(p2) + "." + window.atob(p3);
-      } catch {
-        return null;
-      }
-    };
-
-    return { parts, assembleEmail, key };
-  })();
-
-  let e_is_shown = false;
-  let attemptCount = 0;
-  const maxAttempts = 3;
-  const emailIcon = document.getElementById("iemail");
-  const emailContainer = document.getElementById("email-container");
-
-  // Add rate limiting
-  const rateLimiter = (() => {
-    const attempts = new Map();
-
-    return {
-      checkLimit: () => {
-        const now = Date.now();
-        const recentAttempts = [...attempts.entries()].filter(
-          ([time]) => now - time < 60000
-        );
-        attempts.clear();
-        recentAttempts.forEach(([k, v]) => attempts.set(k, v));
-        return attempts.size < 5;
-      },
-      addAttempt: () => attempts.set(Date.now(), true),
-    };
-  })();
-
-  emailIcon.addEventListener("click", function (e) {
-    e.stopPropagation();
-
-    // Rate limiting check
-    if (!rateLimiter.checkLimit()) {
-      emailIcon.title = "Too many attempts. Please wait.";
-      return;
-    }
-    rateLimiter.addAttempt();
-
-    if (!e_is_shown) {
-      // Bot detection
-      if (attemptCount++ > maxAttempts) {
-        emailIcon.title = "Please prove you're human";
-        return;
-      }
-
-      const tempSpan = document.createElement("span");
-      tempSpan.className = "email-reveal";
-      tempSpan.id = "demail";
-
-      // Create obfuscated display with honeypot
-      const chars = Array.from({ length: 20 }, () => {
-        const char = document.createElement("span");
-        char.className = "email-char";
-        char.style.opacity = "0";
-        // Add honeypot data
-        char.dataset.trap = Math.random().toString(36).substring(7);
-        return char;
+      const weeks = [];
+      let week = [];
+      rows.forEach(function (day, i) {
+        week.push(day);
+        if (week.length === 7 || i === rows.length - 1) {
+          weeks.push(week);
+          week = [];
+        }
       });
 
-      chars.forEach((char) => tempSpan.appendChild(char));
-      emailContainer.appendChild(tempSpan);
+      const grid = document.createElement("div");
+      grid.className = "gh-grid";
+      grid.setAttribute("role", "img");
+      grid.setAttribute(
+        "aria-label",
+        "GitHub contribution calendar for " + user
+      );
 
-      // Delayed reveal with verification
-      setTimeout(() => {
-        if (
-          document.visibilityState === "visible" &&
-          !window._phantom &&
-          !window.__nightmare &&
-          !window.callPhantom &&
-          !window._selenium &&
-          !window.buffer &&
-          !window.emit
-        ) {
-          const { parts, assembleEmail } = secureEmailProtection;
-          const email = assembleEmail(parts.p1, parts.p2, parts.p3);
-
-          if (email) {
-            chars.forEach((char, i) => {
-              setTimeout(() => {
-                char.textContent = email[i] || "";
-                char.style.opacity = "1";
-              }, Math.random() * 300);
-            });
-          }
-
-          tempSpan.style.opacity = "1";
-          tempSpan.style.visibility = "visible";
-        }
-      }, Math.random() * 200 + 100);
-    } else {
-      const demail = document.getElementById("demail");
-      if (demail) {
-        const chars = demail.getElementsByClassName("email-char");
-        Array.from(chars).forEach((char) => {
-          char.textContent = "";
-          char.style.opacity = "0";
+      weeks.forEach(function (w) {
+        w.forEach(function (day) {
+          const cell = document.createElement("span");
+          cell.className = "gh-day l" + (day.level || 0);
+          cell.title = (day.date || "") + ": " + (day.count || 0) + " contributions";
+          grid.appendChild(cell);
         });
+      });
 
-        setTimeout(() => demail.remove(), 300);
-      }
-    }
-    e_is_shown = !e_is_shown;
-  });
-
-  // Enhanced cleanup
-  document.addEventListener("click", (event) => {
-    if (!emailIcon.contains(event.target) && e_is_shown) {
-      const demail = document.getElementById("demail");
-      if (demail) {
-        Array.from(demail.getElementsByClassName("email-char")).forEach(
-          (char) => {
-            char.textContent = "";
-            char.style.opacity = "0";
-          }
-        );
-        setTimeout(() => demail.remove(), 300);
-      }
-      e_is_shown = false;
-    }
-  });
-});
+      el.appendChild(grid);
+    })
+    .catch(function () {
+      el.innerHTML =
+        '<a href="https://github.com/' +
+        user +
+        '">github.com/' +
+        user +
+        "</a>";
+    });
+})();
