@@ -4,216 +4,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Peter Tallosy. Physicist and research engineer working on inference optimization at mesh.applied.">
+    <meta property="og:title" content="Peter Tallosy">
+    <meta property="og:description" content="Physicist and research engineer. Inference optimization at mesh.applied.">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://peter.tallosy.hu/">
     <title>Peter Tallosy</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400&display=swap"
-        rel="stylesheet">
 </head>
 
 <body>
-    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5" />
-            <path
-                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-        </svg>
-    </button>
-
-    <main class="container">
-        <header>
-            <div class="profile-section">
-                <img src="assets/profile.jpg" class="ppic" alt="Peter Tallosy">
-                <div class="intro-text">
-                    <h1>Peter Tallosy</h1>
-                    <p>Physics-trained engineer and CTO specializing in AI-native systems, neuromorphic hardware, and formal verification. Currently building Bad Company, focusing on cryptographically secure agentic frameworks and autonomous infrastructure. Leveraging multi-physics simulation and machine learning to bridge the gap between hardware dynamics and verified AI behavior.</p>
-                    <div class="social-links">
-                        <a href="https://linkedin.com/in/peter-tallosy" target="_blank">LinkedIn</a>
-                        <a href="https://github.com/peti12352" target="_blank">GitHub</a>
-                        <span id="email-container">
-                            <a href="javascript:void(0)" id="iemail">Email</a>
-                            <span id="demail" class="email-reveal"></span>
-                        </span>
-                    </div>
-                </div>
+    <div class="page">
+        <header class="masthead">
+            <img class="photo" src="assets/profile-cv.jpg" alt="Peter Tallosy" width="88" height="88">
+            <div>
+                <h1>Peter Tallosy</h1>
+                <p class="lede">Physicist and research engineer, Budapest.</p>
+                <p class="contact">
+                    <a href="https://github.com/peti12352" rel="noopener">GitHub</a>
+                    <a href="https://www.linkedin.com/in/peter-tallosy/" rel="noopener">LinkedIn</a>
+                    <a href="mailto:peter@tallosy.hu">peter@tallosy.hu</a>
+                </p>
             </div>
         </header>
 
-        <section id="projects" class="section">
-            <h2>Projects & Research</h2>
-            
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-title">CTO & Co-founder <span class="entry-org">@ Bad Company</span></div>
-        <div class="entry-date">Dec 2023 – to date</div>
-      </div>
-      <div class="entry-desc">
-        Born from the <strong>mesh.</strong> builder community. Architecting the infrastructure for a safe, agentic future. Developing <strong>Sentinel</strong>, a Rust-based secure MCP framework with end-to-end encrypted tool-call interception and cryptographically enforced capability systems.
-        
-          <div class="timeline-list">
-            
-              <div class="timeline-item">
-                <span class="timeline-date">Dec 2025 – to date</span>
-                <strong>Research Lead @ AI-Native Systems:</strong> Exploration of formal verification for AI-generated code. Designing semantic filesystems and OS-level abstractions to constrain and verify agentic behavior.
-              </div>
-            
-              <div class="timeline-item">
-                <span class="timeline-date">Sep 2025 – Jan 2026</span>
-                <strong>Sentinel</strong>: high-performance Rust proxy for agentic verification.
-              </div>
-            
-              <div class="timeline-item">
-                <span class="timeline-date">May 2025 – Oct 2025</span>
-                Pivoted from red-teaming games to enterprise-grade agentic security products.
-              </div>
-            
-          </div>
-        
-      </div>
-    </div>
-  
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-title">Research Assistant <span class="entry-org">@ BME Institute of Physics</span></div>
-        <div class="entry-date">June 2024 – to date</div>
-      </div>
-      <div class="entry-desc">
-        <strong>Neuromorphic Hardware & Memristors:</strong> Developed a multi-scale simulation stack for SiO₂/SiOₓ resistive-switching devices. Modeling filament formation and switching dynamics to enable energy-efficient, hardware-native neural network designs.
-        
-      </div>
-    </div>
-  
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-title">Lead Developer <span class="entry-org">@ Generative CAD</span></div>
-        <div class="entry-date">2025</div>
-      </div>
-      <div class="entry-desc">
-        Created a text-to-LEGO pipeline using a coordinate-free model description language for autoregressive build generation. Integrated automated brick detection and library management.
-        
-      </div>
-    </div>
-  
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-title">Member <span class="entry-org">@ mesh</span></div>
-        <div class="entry-date">2023 – to date</div>
-      </div>
-      <div class="entry-desc">
-        Part of the <strong>mesh</strong> builder space community, a collaborative environment fueling innovation and from which Bad Company emerged.
-        
-      </div>
-    </div>
-  
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-title">ML Architect <span class="entry-org">@ Large-scale Optimization</span></div>
-        <div class="entry-date">2024</div>
-      </div>
-      <div class="entry-desc">
-        Deployment of a distributed optimization framework with resource-aware scheduling and reproducible execution for production-scale ML workloads.
-        
-      </div>
-    </div>
-  
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-title">Hardware Developer <span class="entry-org">@ ZetoEU</span></div>
-        <div class="entry-date">2021</div>
-      </div>
-      <div class="entry-desc">
-        Engineering medical-grade ECG/EEG simulation hardware. Built an automated C test suite on Raspberry Pi to verify signal integrity and timing reliability.
-        
-      </div>
-    </div>
-  
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-title">Winner / 3rd Place <span class="entry-org">@ TDK Physics Research</span></div>
-        <div class="entry-date">2022</div>
-      </div>
-      <div class="entry-desc">
-        Researched and implemented false-color processing techniques for astronomical imagery. Published findings and awarded at the national TDK competition.
-        
-      </div>
-    </div>
-  
-        </section>
+        <main>
+            <section class="block">
+                <div class="prose"><p>I am a physicist by training: B.Sc. in physics engineering at BME, finishing in 2027. These days I am also a research engineer. I work on <a href="https://meshapplied.com" target="_blank" rel="noopener">mesh.applied</a>, where we make inference faster for specific tasks, and my thesis is on silicon oxide memristors in the Halbritter group.</p><p>Earlier I did experimental nanophysics, took third place at the national TDK in physics (2022, image processing for astronomy), and built test rigs for medical EEG hardware at Zeto.</p></div>
+            </section>
 
-        <section id="education" class="section">
-            <h2>Education</h2>
-            
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-title">B.Sc. in Physics Engineering</div>
-        <div class="entry-date">2023 – 2027 (Expected)</div>
-      </div>
-      <div class="entry-desc">
-        Budapest University of Technology. Specializing in Nanotechnology and Quantum Applications. Projects: custom numerical solvers, LLM training on Shakespeare, and C++ library design.
-      </div>
-    </div>
-  
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-title">Maturity Exam</div>
-        <div class="entry-date">2023</div>
-      </div>
-      <div class="entry-desc">
-        Piarist School Szeged. Math & Physics Specialization. Graduated with honors.
-      </div>
-    </div>
-  
-        </section>
-
-        <section id="skills" class="section">
-            <h2>Technical Skills</h2>
-            <div class="skills-container">
+            <section class="block">
+                <h2>Now</h2>
                 
-    <div class="skill-cat">
-      <h3>Core Expertise</h3>
-      <div class="skill-list">
-        Physics-driven ML · Neuromorphic Hardware · Agentic AI Security · Distributed Optimization · Formal Verification · Rust · C++ · Python
-        
-      </div>
-    </div>
-  
-    <div class="skill-cat">
-      <h3>Stack</h3>
-      <div class="skill-list">
-        PyTorch · TensorFlow · NumPy · SciPy · OpenCV · LaTeX · Linux · Git · Raspberry Pi / Embedded Systems
-        
-      </div>
-    </div>
-  
-    <div class="skill-cat">
-      <h3>Languages</h3>
-      <div class="skill-list">
-        
-        Hungarian (Native), English (Fluent), German (Fluent)
-      </div>
-    </div>
-  
-            </div>
-        </section>
+    <article class="entry">
+      <h3 class="entry-title"><a href="https://meshapplied.com" rel="noopener">mesh.applied</a> <span class="muted">(2026 to present)</span></h3>
+      <div class="prose"><p>mesh.applied is three of us: Matteo, Janos and me. We make inference faster for one task or domain at a time instead of for models in general. We closed our first deal, and the team will be in San Francisco for the next two months.</p><p>My part is the decode path: kernels, speculative drafters, and the benchmarks that tell us whether a change actually helped.</p><p>The number I trust most right now: a 27B model in NVFP4 with the DFlash2 drafter decodes at 239 tokens/s for a single stream on one RTX 5090. The same model with MTP3 gets 174. I measured this by replaying traces from seven real SWE-agent sessions, because agent traffic is long contexts and a lot of hidden reasoning, and drafters behave differently there than on chat prompts. Seven sessions is a small sample, so read it as a result on those traces and not as a general claim.</p></div>
+    </article>
 
-        <section id="about" class="section">
-            <h2>About</h2>
-            <div class="about-content">
-                <p>Outside of engineering, I run 5Ks, read Dostoevsky, and brew excessive amounts of coffee and yerba mate. I find inspiration in the intersection of health research and electronic music (Marsh, Air).</p>
-                <div class="interests">
-                    <br>
-                    <h3>Research Interests</h3>
-                    <p>Quantum Information, Agentic Safety, Post-CMOS Computing</p>
-                </div>
-            </div>
-        </section>
+    <article class="entry">
+      <h3 class="entry-title"><a href="https://growmesh.io" rel="noopener">mesh.</a> <span class="muted">(co-founder, 2023 to present)</span></h3>
+      <div class="prose"><p>mesh. is a community of builders and hackers in Budapest. I co-founded it in 2023. Today I run the research and projects side of it, which mostly means mentoring people.</p></div>
+    </article>
+            </section>
+
+            <section class="block">
+                <h2>Research</h2>
+                
+    <article class="entry">
+      <h3 class="entry-title">Resistive switching in SiOx <span class="muted">(B.Sc. thesis, BME, 2024 to 2026)</span></h3>
+      <div class="prose"><p>My thesis in the Halbritter group is about how a thin silicon oxide film changes its resistance when you push current through it. I am testing one picture, where conducting paths come from oxygen vacancies percolating through the oxide, against a more filament-like one, and comparing both with the resistance noise measured in the lab.</p><p>The simulation chain starts with a melt-quenched glass in LAMMPS with a machine-learned potential. On top of that sits a resistor network on the vacancy sites, and on top of that a kinetic Monte Carlo model of filament growth with Joule heating.</p><p>It is still early. One result so far: for one choice of barrier parameters I ran 30 seeds at each of 7 bias levels. Filaments grew at every bias, but only the low-bias ones survived. At 0.5 to 1.0 V all 30 runs ended with a stable filament, and at 2.5 V and above none did. The model does not match the measured noise well yet. It is off by about as much as the simpler static fit it was built from (R² of 0.53), so that gap is not new.</p></div>
+    </article>
+
+    <article class="entry">
+      <h3 class="entry-title">Generative LEGO <span class="muted">(2025, restarted 2026)</span></h3>
+      <div class="prose"><p>Text or a photo in, a buildable LEGO model out: parts list, structure, instructions. It builds on BrickNet from CVPR 2026. I first tried this in 2025 and restarted it this year, with LLM-generated captions and, in the last few weeks, diffusion-style generation.</p><p>The results are not good yet. The best recipe is still the unmodified BrickNet checkpoint with best-of-8 sampling, a judge that picks between candidates, and a physical-validity check. A fine-tuned model I had reported as better did not survive a re-check, so I retracted it. Nothing in the pipeline yet checks whether a generated model would stand up under gravity. The research log has every number and every mistake.</p></div>
+    </article>
+            </section>
+
+            <section class="block">
+                <h2>Work</h2>
+                
+    <article class="entry">
+      <h3 class="entry-title"><a href="https://badcompany.xyz" rel="noopener">Lilith</a> <span class="muted">(BadCompany, CTO, 2025 to 2026)</span></h3>
+      <div class="prose"><p>Lilith was a security layer for AI agents. An agent that can call tools can be talked into things you did not intend, and checking inside the agent does not help, because the agent is the thing under attack. So the rules lived outside it. Every tool call was checked against a policy written in Cedar, and on Linux the same policy was enforced in the kernel, so a compromised agent still could not open files or reach hosts it was not allowed to. We delivered it in 2025 and 2026, wrote it up on <a href="https://badcompany.xyz" target="_blank" rel="noopener">badcompany.xyz</a>, and the project is finished.</p></div>
+    </article>
+
+    <article class="entry">
+      <h3 class="entry-title">Test engineering <span class="muted">(Zeto, 2021)</span></h3>
+      <div class="prose"><p>Test rigs for medical EEG and ECG hardware: signal paths, timing, and automated tests in C on embedded Linux.</p></div>
+    </article>
+            </section>
+
+            <section class="block">
+                <h2>Writing</h2>
+                
+    <article class="entry">
+      <h3 class="entry-title"><a href="https://medium.com/@peter_48867/deterministic-agent-security-at-ms-scale-lilith-zero-ab6bff4c3ff0" rel="noopener">Deterministic agent security at ms-scale: Lilith-Zero</a> <span class="muted">(Medium)</span></h3>
+      <div class="prose"><p>How the open source version checks every MCP tool call, and why it fails closed.</p></div>
+    </article>
+
+    <article class="entry">
+      <h3 class="entry-title"><a href="https://github.com/meshapplied/Goethe#readme" rel="noopener">Goethe README</a> <span class="muted">(GitHub)</span></h3>
+      <div class="prose"><p>The design notes for our ternary mixture-of-experts runtime.</p></div>
+    </article>
+            </section>
+
+            <section class="block">
+                <h2>Talks</h2>
+                
+    <article class="entry">
+      <h3 class="entry-title"><a href="https://luma.com/1dyc02te" rel="noopener">Claude Code for Security</a> <span class="muted">(Claude Community Budapest, May 2026)</span></h3>
+      <div class="prose"><p>Policy engines and kernel-level enforcement for AI agents.</p></div>
+    </article>
+            </section>
+
+            <section class="block">
+                <h2>GitHub</h2>
+                
+    <article class="entry">
+      <h3 class="entry-title"><a href="https://github.com/peti12352/gpu-waterz" rel="noopener">gpu-waterz</a> <span class="muted">(CUDA)</span></h3>
+      <div class="prose"><p>A GPU version of waterz, the tool connectomics pipelines use to turn predicted affinities into labelled cells. I built it so that large volumes fit on a 24 GB 3090, then made it fast, and I wanted a CPU alternative as well. On a 5090 it segments a 2.16 billion voxel volume in 3.1 seconds, with segmentation quality (VOI) within 0.02 of stock waterz. Merging is a parallel approximation of the sequential algorithm.</p><p>The hardest part was getting the same answer twice. Agglomeration merges regions by the mean of the affinities on their shared boundary, and I summed those with float atomic adds. Float addition is not associative and the GPU adds in whatever order threads arrive, so two identical runs disagreed on about 740,000 of 7.5 million edges, which flips merge decisions and changes the labels. I switched to fixed-point integer accumulation. Integer addition does not care about order, and now the output is byte-identical from run to run.</p></div>
+    </article>
+
+    <article class="entry">
+      <h3 class="entry-title"><a href="https://github.com/peti12352/lean-interval-bounds" rel="noopener">lean-interval-bounds</a> <span class="muted">(Lean 4)</span></h3>
+      <div class="prose"><p>Tactics that prove bounds on exp, log, sin and cos in Lean 4 with Mathlib. There is an <code>approx</code> tactic and a <code>norm_num</code> extension, and every result is checked by the Lean kernel, so you do not have to trust any floating point.</p></div>
+    </article>
+
+    <article class="entry">
+      <h3 class="entry-title"><a href="https://github.com/meshapplied/Goethe" rel="noopener">Goethe</a> <span class="muted">(meshapplied)</span></h3>
+      <div class="prose"><p>A ternary mixture-of-experts runtime for SGLang. It also holds our NVFP4 kernels.</p></div>
+    </article>
+
+    <article class="entry">
+      <h3 class="entry-title"><a href="https://github.com/BadC-mpany/lilith-zero" rel="noopener">lilith-zero</a> <span class="muted">(BadCompany, Rust)</span></h3>
+      <div class="prose"><p>The open source, userspace version of Lilith. It is Rust middleware that checks MCP tool calls against a policy and fails closed when anything is off. It is lighter than the kernel-level product and runs entirely in userspace.</p></div>
+    </article>
+
+    <article class="entry">
+      <h3 class="entry-title"><a href="https://growmesh.io" rel="noopener">growmesh.io</a> <span class="muted">(mesh.)</span></h3>
+      <div class="prose"><p>The site of the Budapest builder community.</p></div>
+    </article>
+                <div id="gh-graph" data-user="peti12352"></div>
+                <p class="gh-caption">contributions, last 12 months</p>
+            </section>
+        </main>
 
         <footer>
-            <p style="color: var(--fg-light); font-size: 0.8em; margin-top: 8em;">&copy; 2026 Peter Tallosy</p>
+            <p>Peter Tallosy, 2026</p>
         </footer>
-    </main>
+    </div>
 
     <script src="js/script.js"></script>
 </body>

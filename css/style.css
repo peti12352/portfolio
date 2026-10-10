@@ -34,6 +34,9 @@ body {
 }
 
 .masthead {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
   margin-bottom: 2rem;
   padding-bottom: 1.25rem;
   border-bottom: 1px solid #ddd;
@@ -43,6 +46,14 @@ body {
   font-size: 1.75rem;
   font-weight: normal;
   letter-spacing: 0.02em;
+}
+
+.photo {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex: none;
 }
 
 .lede {
@@ -59,6 +70,12 @@ body {
 
 .contact a {
   color: var(--link);
+  margin-right: 1rem;
+}
+
+.prose code {
+  font-family: Menlo, Consolas, monospace;
+  font-size: 0.9em;
 }
 
 .block {

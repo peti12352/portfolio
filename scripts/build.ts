@@ -2,60 +2,28 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { minify } from 'html-minifier';
 import { content } from '../src/content';
-import { Project, Research, MiscItem } from '../src/types/content';
+import { Entry } from '../src/types/content';
 
 const OUTPUT_DIR = 'public';
 const TEMPLATE_PATH = path.join(__dirname, '..', 'templates', 'base.html');
 
-function entryHtml(
-  title: string,
-  org: string,
-  when: string,
-  body: string,
-  link?: string
-): string {
-  const head = link
-    ? `<a href="${link}" rel="noopener">${title}</a>`
-    : title;
-  return `
+function paragraphs(body: string): string {
+  return body
+    .split(/\n\s*\n/)
+    .map((p) => `<p>${p.trim()}</p>`)
+    .join('');
+}
+
+function entries(list: Entry[]): string {
+  return list
+    .map((e) => {
+      const head = e.link ? `<a href="${e.link}" rel="noopener">${e.title}</a>` : e.title;
+      return `
     <article class="entry">
-      <h3 class="entry-title">${head} <span class="muted">(${org}, ${when})</span></h3>
-      <div class="prose">${body}</div>
+      <h3 class="entry-title">${head} <span class="muted">(${e.meta})</span></h3>
+      <div class="prose">${paragraphs(e.body)}</div>
     </article>`;
-}
-
-function projectEntry(p: Project): string {
-  let body = p.description;
-  if (p.timeline?.length) {
-    body += `<ul class="timeline">${p.timeline
-      .map((t) => `<li><strong>${t.date}</strong> ${t.description}</li>`)
-      .join('')}</ul>`;
-  }
-  return entryHtml(p.title, p.organization, p.timespan.replace('Present', 'present'), body, p.link);
-}
-
-function generateResearch(research: Research[]): string {
-  return research
-    .map((r) => {
-      let body = r.description;
-      if (r.highlights?.length) {
-        body += `<ul>${r.highlights.map((h) => `<li>${h}</li>`).join('')}</ul>`;
-      }
-      return entryHtml(r.title, r.organization, r.timespan.replace('Present', 'present'), body, r.link);
     })
-    .join('\n');
-}
-
-function generateMisc(misc: MiscItem[]): string {
-  return misc
-    .map((m) =>
-      entryHtml(
-        m.title,
-        m.organization || '',
-        m.timespan,
-        m.description
-      )
-    )
     .join('\n');
 }
 
@@ -63,23 +31,21 @@ async function build() {
   console.log('Building portfolio...');
   const template = fs.readFileSync(TEMPLATE_PATH, 'utf-8');
 
-  const nowProjects = content.projects.filter((p) =>
-    p.title.toLowerCase().includes('inference')
-  );
-  const workProjects = content.projects.filter((p) => !nowProjects.includes(p));
-
   const replacements: Record<string, string> = {
-    '{{NAME}}': content.personal.name,
-    '{{INTRO}}': content.personal.intro,
-    '{{BIO}}': content.personal.bio,
-    '{{PROJECTS_NOW}}': nowProjects.map(projectEntry).join('\n'),
-    '{{PROJECTS_WORK}}': workProjects.map(projectEntry).join('\n'),
-    '{{RESEARCH}}': generateResearch(content.research),
-    '{{MISC}}': generateMisc(content.misc),
-    '{{LINKEDIN}}': content.personal.social.linkedin || '#',
-    '{{GITHUB}}': content.personal.social.github || '#',
-    '{{EMAIL}}': content.personal.social.email || '',
-    '{{GITHUB_USER}}': 'peti12352',
+    '{{NAME}}': content.name,
+    '{{INTRO}}': content.intro,
+    '{{PHOTO}}': content.photo,
+    '{{BIO}}': paragraphs(content.bio),
+    '{{NOW}}': entries(content.now),
+    '{{RESEARCH}}': entries(content.research),
+    '{{WORK}}': entries(content.work),
+    '{{WRITING}}': entries(content.writing),
+    '{{TALKS}}': entries(content.talks),
+    '{{CODE}}': entries(content.code),
+    '{{LINKEDIN}}': content.social.linkedin,
+    '{{GITHUB}}': content.social.github,
+    '{{EMAIL}}': content.social.email,
+    '{{GITHUB_USER}}': content.githubUser,
     '{{YEAR}}': new Date().getFullYear().toString(),
   };
 
@@ -112,7 +78,9 @@ async function build() {
 
   copyDir('css', `${OUTPUT_DIR}/css`);
   copyDir('js', `${OUTPUT_DIR}/js`);
-  copyDir('assets', `${OUTPUT_DIR}/assets`);
+  fs.rmSync(`${OUTPUT_DIR}/assets`, { recursive: true, force: true });
+  fs.mkdirSync(`${OUTPUT_DIR}/assets`, { recursive: true });
+  fs.copyFileSync(content.photo, path.join(OUTPUT_DIR, content.photo));
 
   // Replace iframe wrapper on apex domain when deployed to peter.tallosy.hu
   fs.writeFileSync(
