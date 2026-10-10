@@ -38,7 +38,7 @@
                 
     <article class="entry">
       <h3 class="entry-title"><a href="https://meshapplied.com" rel="noopener">mesh.applied</a> <span class="muted">(2026 to present)</span></h3>
-      <div class="prose"><p>Matteo, Janos and I run mesh.applied. We speed up inference for one particular task rather than for LLMs in general. We closed our first deal, and the three of us will be in San Francisco for the next two months.</p><p>I work on decoding: kernels and speculative drafters, mostly, plus the benchmarks that tell us whether a change did anything.</p><p>Latest number. On one RTX 5090, a 27B model in NVFP4 with the DFlash2 drafter generates 239 tokens/s for a single stream. With MTP3 it generates 174. I got these by replaying traces from seven real SWE-agent sessions. Agent traffic has long contexts and a lot of reasoning tokens, so I didn't want to benchmark on chat prompts. Seven sessions is small, so treat it as a result on those traces.</p></div>
+      <div class="prose"><p>Matteo, Janos and I run mesh.applied. We speed up inference for one particular task rather than for LLMs in general. We closed our first deal, and the three of us will be in San Francisco for the next two months.</p><p>I write inference kernels and speculative drafters, and I run the benchmarks for them.</p><p>Latest number. On one RTX 5090, a 27B model in NVFP4 with the DFlash2 drafter generates 239 tokens/s for a single stream. With MTP3 it generates 174. I got these by replaying traces from seven real SWE-agent sessions. Agent traffic has long contexts and a lot of reasoning tokens, so I didn't want to benchmark on chat prompts. Seven sessions is small, so treat it as a result on those traces.</p></div>
     </article>
 
     <article class="entry">
