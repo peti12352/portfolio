@@ -13,7 +13,9 @@ export const content: SiteContent = {
     linkedin: "https://www.linkedin.com/in/peter-tallosy/",
     email: "peter@tallosy.hu",
   },
-  bio: `I'm a physicist. I work on making inference faster at ${a("https://meshapplied.com", "mesh.applied")}. My thesis is on silicon oxide memristors, in the Halbritter group at BME.
+  bio: `I'm a physicist. I work on making inference faster at ${a("https://meshapplied.com", "mesh.applied")}. I'm also working on my thesis, which is about numerically modelling SiO<sub>x</sub> (silicon oxide) memristors, in the Halbritter group at BME.
+
+A memristor is a resistor with memory: its resistance depends on the voltage or current that was applied to it in the past. You can use them as non-volatile memory. If you arrange them in a crossbar array, they can also multiply a matrix by a vector, with Ohm's and Kirchhoff's laws doing the arithmetic.
 
 Before this I did some experimental nanophysics, and in 2022 I got third place at the national TDK with an image processing project for astronomy.`,
 
@@ -40,7 +42,7 @@ On one RTX 5090, a 27B model in NVFP4 with the DFlash2 drafter runs at 239 token
     {
       title: "Resistive switching in SiOx",
       meta: "B.Sc. thesis, BME, 2024 to 2026",
-      body: `My thesis is on how a thin film of silicon oxide switches its resistance when current goes through it. I'm comparing two explanations against the noise we measure in the lab. In one, the conducting path forms from oxygen vacancies percolating through the oxide. In the other it's a more filament-like picture.
+      body: `The question is how a thin film of silicon oxide switches its resistance when current goes through it. I'm comparing two explanations against the noise we measure in the lab. In one, the conducting path forms from oxygen vacancies percolating through the oxide. In the other it's a more filament-like picture.
 
 To simulate it I use LAMMPS with a machine-learned potential to make the glass, put a resistor network on its vacancy sites, and run a kinetic Monte Carlo model on top that grows filaments with Joule heating.
 

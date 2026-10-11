@@ -31,7 +31,7 @@
 
         <main>
             <section class="block">
-                <div class="prose"><p>I'm a physicist. I work on making inference faster at <a href="https://meshapplied.com" target="_blank" rel="noopener">mesh.applied</a>. My thesis is on silicon oxide memristors, in the Halbritter group at BME.</p><p>Before this I did some experimental nanophysics, and in 2022 I got third place at the national TDK with an image processing project for astronomy.</p></div>
+                <div class="prose"><p>I'm a physicist. I work on making inference faster at <a href="https://meshapplied.com" target="_blank" rel="noopener">mesh.applied</a>. I'm also working on my thesis, which is about numerically modelling SiO<sub>x</sub> (silicon oxide) memristors, in the Halbritter group at BME.</p><p>A memristor is a resistor with memory: its resistance depends on the voltage or current that was applied to it in the past. You can use them as non-volatile memory. If you arrange them in a crossbar array, they can also multiply a matrix by a vector, with Ohm's and Kirchhoff's laws doing the arithmetic.</p><p>Before this I did some experimental nanophysics, and in 2022 I got third place at the national TDK with an image processing project for astronomy.</p></div>
             </section>
 
             <section class="block">
@@ -53,7 +53,7 @@
                 
     <article class="entry">
       <h3 class="entry-title">Resistive switching in SiOx <span class="muted">(B.Sc. thesis, BME, 2024 to 2026)</span></h3>
-      <div class="prose"><p>My thesis is on how a thin film of silicon oxide switches its resistance when current goes through it. I'm comparing two explanations against the noise we measure in the lab. In one, the conducting path forms from oxygen vacancies percolating through the oxide. In the other it's a more filament-like picture.</p><p>To simulate it I use LAMMPS with a machine-learned potential to make the glass, put a resistor network on its vacancy sites, and run a kinetic Monte Carlo model on top that grows filaments with Joule heating.</p><p>It's early. For one choice of barrier parameters I ran 30 seeds at each of 7 bias levels. Filaments grew at every bias, but they only survived at low bias: all 30 runs were stable at 0.5 to 1.0 V and none were at 2.5 V or above. The noise is still off compared to the lab data, about as much as in the simpler static fit I started from (R² of 0.53).</p></div>
+      <div class="prose"><p>The question is how a thin film of silicon oxide switches its resistance when current goes through it. I'm comparing two explanations against the noise we measure in the lab. In one, the conducting path forms from oxygen vacancies percolating through the oxide. In the other it's a more filament-like picture.</p><p>To simulate it I use LAMMPS with a machine-learned potential to make the glass, put a resistor network on its vacancy sites, and run a kinetic Monte Carlo model on top that grows filaments with Joule heating.</p><p>It's early. For one choice of barrier parameters I ran 30 seeds at each of 7 bias levels. Filaments grew at every bias, but they only survived at low bias: all 30 runs were stable at 0.5 to 1.0 V and none were at 2.5 V or above. The noise is still off compared to the lab data, about as much as in the simpler static fit I started from (R² of 0.53).</p></div>
     </article>
 
     <article class="entry">
