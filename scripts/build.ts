@@ -2,25 +2,20 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { minify } from 'html-minifier';
 import { content } from '../src/content';
+import { paragraphs } from '../src/format';
 import { Entry } from '../src/types/content';
 
 const OUTPUT_DIR = 'public';
 const TEMPLATE_PATH = path.join(__dirname, '..', 'templates', 'base.html');
 
-function paragraphs(body: string): string {
-  return body
-    .split(/\n\s*\n/)
-    .map((p) => `<p>${p.trim()}</p>`)
-    .join('');
-}
-
 function entries(list: Entry[]): string {
   return list
     .map((e) => {
       const head = e.link ? `<a href="${e.link}" rel="noopener">${e.title}</a>` : e.title;
+      const meta = e.meta.trim() ? ` <span class="muted">(${e.meta})</span>` : '';
       return `
     <article class="entry">
-      <h3 class="entry-title">${head} <span class="muted">(${e.meta})</span></h3>
+      <h3 class="entry-title">${head}${meta}</h3>
       <div class="prose">${paragraphs(e.body)}</div>
     </article>`;
     })

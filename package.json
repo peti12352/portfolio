@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "bun scripts/build.ts",
-    "dev": "bunx nodemon --watch src --watch templates --ext ts,html --exec 'bun scripts/build.ts'"
+    "dev": "bun scripts/dev.ts"
   },
   "dependencies": {
     "html-minifier": "^4.0.0"

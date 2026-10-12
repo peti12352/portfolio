@@ -121,6 +121,36 @@ body {
   margin-bottom: 0.75rem;
 }
 
+.prose .ol-group {
+  margin: 0.25rem 0 0.65rem;
+  margin-left: 1.5em;
+}
+
+.prose .ol-group + p {
+  margin-top: 0.85rem;
+}
+
+.prose .ol-top {
+  margin: 0.5rem 0 0.35rem;
+  padding-left: 1.5em;
+  text-indent: -1.5em;
+}
+
+.prose .ol-group .ol-top:first-child {
+  margin-top: 0;
+}
+
+.prose .ol-sub {
+  margin: 0 0 0.3rem;
+  padding-left: 3em;
+  text-indent: -1.5em;
+}
+
+.prose .ol-detail {
+  margin: 0 0 0.45rem;
+  padding-left: 1.5em;
+}
+
 .prose ul,
 .prose ol {
   margin: 0.5rem 0 0.75rem 1.25rem;
@@ -210,4 +240,5 @@ footer a {
   footer {
     border-color: #333;
   }
+
 }
