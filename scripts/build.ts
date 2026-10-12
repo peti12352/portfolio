@@ -35,17 +35,19 @@ function writeHtml(filePath: string, html: string, minifyOut = true) {
   fs.writeFileSync(filePath, out);
 }
 
-function shellVars(depthPrefix: string) {
+function shellVars() {
+  const photo = content.photo.startsWith('/')
+    ? content.photo
+    : `/${content.photo}`;
   return {
     NAME: content.name,
     INTRO: content.intro,
-    PHOTO: content.photo,
+    PHOTO: photo,
     LINKEDIN: content.social.linkedin,
     GITHUB: content.social.github,
     EMAIL: content.social.email,
     GITHUB_USER: content.githubUser,
     YEAR: new Date().getFullYear().toString(),
-    ROOT: depthPrefix,
     HOME: canonicalUrl('/'),
   };
 }
@@ -67,7 +69,7 @@ async function build() {
   );
 
   const homeHtml = fill(homeTpl, {
-    ...shellVars(''),
+    ...shellVars(),
     BIO: paragraphs(content.bio),
     NAV: renderNav(sections, {}),
   });
@@ -75,11 +77,9 @@ async function build() {
   writeHtml(path.join(OUTPUT_DIR, 'index.html'), homeHtml);
   fs.writeFileSync(path.join(ROOT, 'index.html'), homeHtml);
 
-  const depthPrefix = '../';
-
   for (const sec of sections) {
     const sectionHtml = fill(sectionTpl, {
-      ...shellVars(depthPrefix),
+      ...shellVars(),
       NAV: renderNav(sections, { activeSection: sec.slug }),
       SECTION: renderSectionIndex(sec),
       PAGE_TITLE: `${sec.label}, ${content.name}`,
@@ -99,7 +99,7 @@ async function build() {
         entry.body.replace(/<[^>]+>/g, '').slice(0, 160).trim();
 
       const entryHtml = fill(entryTpl, {
-        ...shellVars(depthPrefix),
+        ...shellVars(),
         NAV: renderNav(sections, { activeSection: sec.slug }),
         ENTRY: renderEntryArticle(entry),
         PAGE_TITLE: pageTitle,

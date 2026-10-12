@@ -1,18 +1,5 @@
 {
   "buildCommand": "bun scripts/build.ts",
   "outputDirectory": "public",
-  "installCommand": "bun install",
-  "redirects": [
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "portfolio-vert-six-70.vercel.app"
-        }
-      ],
-      "destination": "https://peter.tallosy.hu/:path*",
-      "permanent": true
-    }
-  ]
+  "installCommand": "bun install"
 }
