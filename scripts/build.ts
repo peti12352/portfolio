@@ -46,7 +46,7 @@ function shellVars(depthPrefix: string) {
     GITHUB_USER: content.githubUser,
     YEAR: new Date().getFullYear().toString(),
     ROOT: depthPrefix,
-    HOME: '/',
+    HOME: canonicalUrl('/'),
   };
 }
 

@@ -1,6 +1,6 @@
 import { content } from './content';
 import { paragraphs } from './format';
-import { sitePath } from './origin';
+import { canonicalUrl } from './origin';
 import { Entry, SiteContent } from './types/content';
 
 export function entrySlug(title: string): string {
@@ -65,7 +65,7 @@ export function renderNav(
   const { activeSection } = opts;
   const items = sections
     .map((sec) => {
-      const path = sitePath(`/${sec.slug}/`);
+      const path = canonicalUrl(`/${sec.slug}/`);
       const active =
         activeSection === sec.slug ? ' aria-current="page"' : '';
       return `<li><a href="${path}"${active}>${sec.label}</a></li>`;
@@ -82,7 +82,7 @@ export function renderSectionIndex(sec: NavSection): string {
       const meta = entry.meta.trim()
         ? `<span class="muted"> (${entry.meta})</span>`
         : '';
-      return `<li><a href="${href}">${entry.title}</a>${meta}</li>`;
+      return `<li><a href="${canonicalUrl(href)}">${entry.title}</a>${meta}</li>`;
     })
     .join('\n');
 
