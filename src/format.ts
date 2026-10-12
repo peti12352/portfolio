@@ -26,19 +26,25 @@ export function paragraphs(body: string): string {
       continue;
     }
 
+    // List after a plain intro (e.g. "pipelines consist of:") — numbered lines only; body follows flush left.
+    const listAfterIntro =
+      i > 0 && !isTop(chunks[i - 1]) && !isSub(chunks[i - 1]);
+
     const parts: string[] = [];
     while (i < chunks.length && (isTop(chunks[i]) || isSub(chunks[i]))) {
       if (isTop(chunks[i])) {
         parts.push(`<p class="ol-top">${chunks[i]}</p>`);
         i++;
-        while (
-          i < chunks.length &&
-          !isTop(chunks[i]) &&
-          !isSub(chunks[i]) &&
-          !isStandalone(chunks[i])
-        ) {
-          parts.push(`<p class="ol-detail">${chunks[i]}</p>`);
-          i++;
+        if (!listAfterIntro) {
+          while (
+            i < chunks.length &&
+            !isTop(chunks[i]) &&
+            !isSub(chunks[i]) &&
+            !isStandalone(chunks[i])
+          ) {
+            parts.push(`<p class="ol-detail">${chunks[i]}</p>`);
+            i++;
+          }
         }
       } else {
         parts.push(`<p class="ol-sub">${chunks[i]}</p>`);

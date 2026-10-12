@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Peter Tallosy. Physicist and research engineer working on inference optimization at mesh.applied.">
+    <meta property="og:title" content="{{NAME}}">
+    <meta property="og:description" content="Physicist and research engineer. Inference optimization at mesh.applied.">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://peter.tallosy.hu/">
+    <title>{{NAME}}</title>
+    <link rel="stylesheet" href="{{ROOT}}css/style.css">
+</head>
+
+<body>
+    <div class="page">
+        <header class="masthead">
+            <div class="masthead-identity">
+                <img class="photo" src="{{ROOT}}{{PHOTO}}" alt="Peter Tallosy" width="88" height="88">
+                <div>
+                    <h1>{{NAME}}</h1>
+                    <p class="lede">{{INTRO}}</p>
+                    <p class="contact">
+                        <a href="{{GITHUB}}" target="_blank" rel="noopener">GitHub</a>
+                        <a href="{{LINKEDIN}}" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="mailto:{{EMAIL}}">{{EMAIL}}</a>
+                    </p>
+                </div>
+            </div>
+            {{NAV}}
+        </header>
+
+        <main>
+            <section class="block">
+                <div class="prose">{{BIO}}</div>
+            </section>
+            <section class="block gh-block">
+                <div id="gh-graph" data-user="{{GITHUB_USER}}"></div>
+                <p class="gh-caption">contributions, last 12 months</p>
+            </section>
+        </main>
+
+        <footer>
+            <p>{{NAME}}, {{YEAR}}</p>
+        </footer>
+    </div>
+
+    <script src="{{ROOT}}js/script.js"></script>
+</body>
+
+</html>

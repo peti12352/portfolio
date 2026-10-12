@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{PAGE_DESC}}">
+    <meta property="og:title" content="{{PAGE_TITLE}}">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="{{CANONICAL}}">
+    <title>{{PAGE_TITLE}}</title>
+    <link rel="stylesheet" href="{{ROOT}}css/style.css">
+</head>
+
+<body>
+    <div class="page">
+        <header class="masthead">
+            <div class="masthead-identity">
+                <a class="masthead-home" href="{{HOME}}">
+                    <img class="photo" src="{{ROOT}}{{PHOTO}}" alt="Peter Tallosy" width="88" height="88">
+                </a>
+                <div>
+                    <h1><a class="name-link" href="{{HOME}}">{{NAME}}</a></h1>
+                    <p class="lede">{{INTRO}}</p>
+                    <p class="contact">
+                        <a href="{{GITHUB}}" target="_blank" rel="noopener">GitHub</a>
+                        <a href="{{LINKEDIN}}" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="mailto:{{EMAIL}}">{{EMAIL}}</a>
+                    </p>
+                </div>
+            </div>
+            {{NAV}}
+        </header>
+
+        {{SECTION}}
+
+        <footer>
+            <p><a href="{{HOME}}">{{NAME}}</a>, {{YEAR}}</p>
+        </footer>
+    </div>
+
+    <script src="{{ROOT}}js/script.js"></script>
+</body>
+
+</html>

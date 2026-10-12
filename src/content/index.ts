@@ -114,7 +114,7 @@ We are now in a testing phase with the largest bank in Central and Eastern Europ
     },
     {
       title: "Goethe README",
-      meta: "GitHub",
+      meta: "",
       link: "https://github.com/meshapplied/Goethe#readme",
       body: `The design notes for our ternary mixture-of-experts runtime.`,
     },
@@ -122,8 +122,8 @@ We are now in a testing phase with the largest bank in Central and Eastern Europ
 
   talks: [
     {
-      title: "Claude Code for Security",
-      meta: "Claude Community Budapest, May 2026",
+      title: "Talk at Claude Security",
+      meta: "Anthropic Claude Community Budapest, May 2026",
       link: "https://luma.com/1dyc02te",
       body: `Gave a talk on policy engines (and useful properties they need to have) and kernel level enforcement for AI agents.`,
     },
@@ -132,15 +132,27 @@ We are now in a testing phase with the largest bank in Central and Eastern Europ
   code: [
     {
       title: "gpu-waterz",
-      meta: "CUDA",
+      meta: "",
       link: "https://github.com/peti12352/gpu-waterz",
-      body: `waterz turns the affinities a neural network predicts into labelled cells, for connectomics. This is a GPU version. I wanted it to fit big volumes on a 24 GB 3090, to be fast, and to have a CPU alternative too. On a 5090 it does a 2.16 billion voxel volume in 3.1 seconds, and the segmentation quality (VOI) is within 0.02 of stock waterz. The merging is a parallel approximation of the sequential algorithm, not an exact port.
+      body: `Connectomics pipelines consist of:
 
-The hardest part was getting the same result twice. Regions get merged by the mean affinity along their shared boundary, and I was summing those with float atomic adds. Float addition isn't associative and the GPU adds in whatever order threads arrive, so two identical runs disagreed on about 740,000 of 7.5 million edges. That flips merge decisions, which changes the labels. Fixed-point integer accumulation fixed it, because integer addition doesn't care about order. Now the output is byte-identical on every run.`,
+1. inference on EM volumes (electron-microscopy image stacks of tissue, e.g. brain at nanoscale resolution): a CNN predicts <em>affinities</em> on voxel faces (how likely (==probability of) two neighboring voxels being the same cell);
+
+2. segmentation (decode affinities to labels): watershed to form superpixels, then merge neighbors while mean affinity on the shared boundary stays above a threshold, so every voxel gets an integer segment ID (which cell or fragment it belongs to).
+
+Usually the second step is done by the algorithms (mainly watershed) implemented in the ${a("https://github.com/funkey/waterz", "waterz")} library (CPU based). gpu-waterz is step 2 on GPU: CUDA watershed and contact-mean agglomeration, numpy and torch API; it is not a CPU fallback product.
+
+Watershed, in one sentence intuitively: each voxel “rolls” to whichever neighbor is most strongly predicted to be the same cell, and keeps going until it lands in a small basin; you end up with a huge number of tiny fragments, not finished neurons. More precisely, on the voxel grid you have an affinity on every face between neighbors; watershed builds a directed forest by sending each voxel along the highest-affinity outgoing face (greedy ascent on that field) until you hit a cycle or a local plateau. All voxels that drain to the same attractor share one seed label. Weak faces act as dams. That oversegmentation is deliberate: the later merge step is what fuses those seeds into segments that match the biology.
+
+${a("https://cremi.org/", "CREMI")} is the standard MICCAI benchmark for neuron segmentation from EM: public volumes with expert ground-truth labels. I benchmark on sample A (validation crop), tiled to 2.16 billion voxels at affinity threshold 0.3. Quality is measured with <em>VOI</em> (variation of information), an information-theoretic distance between two segmentations (lower is better). It splits into a <em>split</em> term (extra fragments vs ground truth) and a <em>merge</em> term (distinct cells wrongly fused); connectomics papers usually report both. On 1× RTX 5090 the full gpu-waterz decode is about <strong>3.1 s</strong> (affinities already in VRAM). Stock <code>waterz.agglomerate</code> on the same HDF5 is about <strong>9.4 min</strong> on the CPU, roughly <strong>180×</strong> wall clock on the same machine. Split and merge VOI match stock waterz on that CREMI-A setup (fragment IDs do not need to match).
+
+The slow part of waterz is not the watershed. Step 2 is a priority queue on region-graph edges: take the pair with the highest contact-mean affinity on their shared face, merge them, recompute every neighbor mean on the contracted graph, repeat. That loop is serial; one GPU thread per pop still waits on the last update. Many GPU segmenters dodge that by freezing the original voxel edges and never refreshing means after a merge (Kruskal / mutex / GASP-style pipelines). They can be fast, but they are not the same objective as waterz, and on the same CREMI-A crop they do not reach the split/merge VOI that stock waterz gets.
+
+I kept waterz’s contact-mean statistic and thresholding, but not the heap order. Instead merges use ${a("https://papers.nips.cc/paper_files/paper/2022/file/909de96145d97514b143dfde03e6cd2b-Paper-Conference.pdf", "ParHAC")} (Parallel Hierarchical Agglomerative Clustering, NeurIPS 2022): a parallel substitute for “always merge the current best edge.” Each round builds a <em>matching</em> on the region graph, a set of edges with no shared fragment, so those unions cannot conflict. An edge is eligible if it is <em>(1+ε)-heavy</em>: its contact-mean is within a factor (1+ε) of the strongest edge still incident on each endpoint (the serial heap would only take the global max one edge at a time). All matched pairs merge in parallel; then contact-means are recomputed on the contracted graph, same as after one heap step, and the next round starts. Small ε ≈ fewer, safer parallel merges; large ε ≈ more throughput but you may fuse pairs the heap would not have touched yet, and merge mistakes tend to hurt more than leaving an extra split. The ε used in the repo still matches stock waterz on CREMI-A split/merge VOI (fragment IDs need not match). Float <code>atomicAdd</code> on face sums once made identical affinities give different labels run to run; integer accumulation fixed that so reruns are byte-identical.`,
     },
     {
       title: "lean-interval-bounds",
-      meta: "Lean 4",
+      meta: "",
       link: "https://github.com/peti12352/lean-interval-bounds",
       body: `Mainly to make it possible to formalize physics problems in Lean with differential equations which very often have solutions involving transcendental functions (like <code>sin()</code> or <code>cos()</code> for the harmonic oscillator, or the Schrödinger equation with very simple boundary conditions, though those can be written as a complex exponential <code>exp(i*x)</code>, or <code>log()</code> for rocket equations, etc.) or some composition of them.
 
@@ -150,7 +162,7 @@ If the tactic closes the goal, the Lean kernel (the small verifier that only acc
     },
     {
       title: "Goethe",
-      meta: "meshapplied",
+      meta: "",
       link: "https://github.com/meshapplied/Goethe",
       body: `Our ternary mixture-of-experts runtime for SGLang. It also has our NVFP4 kernels.`,
     },
