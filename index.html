@@ -11,14 +11,19 @@
     <meta property="og:url" content="https://peter.tallosy.hu/">
     <link rel="canonical" href="https://peter.tallosy.hu/">
     <title>Peter Tallosy</title>
+    <link rel="preload" href="/css/style.css" as="style">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="prefetch" href="/now/">
+    <link rel="prefetch" href="/projects/">
+    <link rel="prefetch" href="/research/">
+    <link rel="prefetch" href="/unsorted/">
 </head>
 
 <body>
     <div class="page">
         <header class="masthead">
             <div class="masthead-identity">
-                <img class="photo" src="/assets/profile-cv.jpg" alt="Peter Tallosy" width="88" height="88">
+                <img class="photo" src="/assets/profile-cv.jpg" alt="Peter Tallosy" width="88" height="88" fetchpriority="high">
                 <div>
                     <h1>Peter Tallosy</h1>
                     <p class="lede">Physicist and research engineer, Budapest.</p>
@@ -52,7 +57,7 @@
         </footer>
     </div>
 
-    <script src="/js/script.js"></script>
+    <script src="/js/script.js" defer></script>
 </body>
 
 </html>

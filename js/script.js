@@ -1,4 +1,29 @@
 (function () {
+  function prefetchUrl(href) {
+    if (!href || href.startsWith("mailto:") || href.startsWith("http")) return;
+    const link = document.createElement("link");
+    link.rel = "prefetch";
+    link.href = href;
+    document.head.appendChild(link);
+  }
+
+  document.querySelectorAll("a[href^='/']").forEach(function (anchor) {
+    anchor.addEventListener(
+      "mouseenter",
+      function () {
+        prefetchUrl(anchor.getAttribute("href"));
+      },
+      { once: true }
+    );
+    anchor.addEventListener(
+      "focus",
+      function () {
+        prefetchUrl(anchor.getAttribute("href"));
+      },
+      { once: true }
+    );
+  });
+
   const el = document.getElementById("gh-graph");
   if (!el) return;
   const user = el.dataset.user || "peti12352";
