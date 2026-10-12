@@ -48,7 +48,7 @@ function shellVars() {
     EMAIL: content.social.email,
     GITHUB_USER: content.githubUser,
     YEAR: new Date().getFullYear().toString(),
-    HOME: canonicalUrl('/'),
+    HOME: '/',
   };
 }
 
@@ -129,6 +129,11 @@ async function build() {
   fs.copyFileSync(
     path.join(ROOT, content.photo),
     path.join(OUTPUT_DIR, content.photo)
+  );
+
+  fs.copyFileSync(
+    path.join(ROOT, 'hosting', 'iis-web.config'),
+    path.join(OUTPUT_DIR, 'web.config')
   );
 
   console.log('Done.');
