@@ -68,7 +68,7 @@ Additionally we have some experiments and to this date immature prototypes:
 
 2. atomistic simulations to supply the geometry
 
-LAMMPS with an ACE interatomic potential (Si-O) to melt-quench amorphous SiO<sub>x</sub> with controlled oxygen deficiency, avoiding the spurious silicon nanowire artifact that older reactive force fields (like ReaxFF) tend to produce
+I used the LAMMPS framework (C++-based molecular dynamics library) with machine-learned interatomic potentials: an ACE (atomic cluster expansion) Si–O model to melt-quench amorphous SiO<sub>x</sub> with controlled oxygen deficiency, avoiding the spurious silicon nanowire artifact that older reactive force fields (like ReaxFF) tend to produce
 
 we used the generated vacancy positions from those cells and fed them into the networks in (1)`,
     },

@@ -3,6 +3,7 @@ import * as path from 'path';
 import { minify } from 'html-minifier';
 import { content } from '../src/content';
 import { paragraphs } from '../src/format';
+import { canonicalUrl } from '../src/origin';
 import {
   navSections,
   renderEntryArticle,
@@ -45,7 +46,7 @@ function shellVars(depthPrefix: string) {
     GITHUB_USER: content.githubUser,
     YEAR: new Date().getFullYear().toString(),
     ROOT: depthPrefix,
-    HOME: depthPrefix ? `${depthPrefix}index.html` : 'index.html',
+    HOME: '/',
   };
 }
 
@@ -68,26 +69,22 @@ async function build() {
   const homeHtml = fill(homeTpl, {
     ...shellVars(''),
     BIO: paragraphs(content.bio),
-    NAV: renderNav(sections, { prefix: '' }),
+    NAV: renderNav(sections, {}),
   });
 
   writeHtml(path.join(OUTPUT_DIR, 'index.html'), homeHtml);
   fs.writeFileSync(path.join(ROOT, 'index.html'), homeHtml);
 
-  const siteOrigin = 'https://peter.tallosy.hu';
   const depthPrefix = '../';
 
   for (const sec of sections) {
     const sectionHtml = fill(sectionTpl, {
       ...shellVars(depthPrefix),
-      NAV: renderNav(sections, {
-        prefix: depthPrefix,
-        activeSection: sec.slug,
-      }),
+      NAV: renderNav(sections, { activeSection: sec.slug }),
       SECTION: renderSectionIndex(sec),
       PAGE_TITLE: `${sec.label}, ${content.name}`,
       PAGE_DESC: `${sec.label}, ${content.name}`,
-      CANONICAL: `${siteOrigin}/${sec.slug}/`,
+      CANONICAL: canonicalUrl(`/${sec.slug}/`),
     });
     writeHtml(
       path.join(OUTPUT_DIR, sec.slug, 'index.html'),
@@ -103,14 +100,11 @@ async function build() {
 
       const entryHtml = fill(entryTpl, {
         ...shellVars(depthPrefix),
-        NAV: renderNav(sections, {
-          prefix: depthPrefix,
-          activeSection: sec.slug,
-        }),
+        NAV: renderNav(sections, { activeSection: sec.slug }),
         ENTRY: renderEntryArticle(entry),
         PAGE_TITLE: pageTitle,
         PAGE_DESC: pageDesc,
-        CANONICAL: `${siteOrigin}${href}`,
+        CANONICAL: canonicalUrl(href),
       });
 
       writeHtml(path.join(OUTPUT_DIR, rel), entryHtml);
@@ -135,11 +129,6 @@ async function build() {
   fs.copyFileSync(
     path.join(ROOT, content.photo),
     path.join(OUTPUT_DIR, content.photo)
-  );
-
-  fs.writeFileSync(
-    path.join(OUTPUT_DIR, 'DEPLOY_APEX.txt'),
-    `Serve this public/ directory at https://peter.tallosy.hu/ (no iframe).\n`
   );
 
   console.log('Done.');

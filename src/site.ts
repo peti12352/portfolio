@@ -1,5 +1,6 @@
 import { content } from './content';
 import { paragraphs } from './format';
+import { sitePath } from './origin';
 import { Entry, SiteContent } from './types/content';
 
 export function entrySlug(title: string): string {
@@ -59,12 +60,12 @@ export function navSections(c: SiteContent = content): NavSection[] {
 /** Masthead: four section links only. */
 export function renderNav(
   sections: NavSection[],
-  opts: { prefix: string; activeSection?: string }
+  opts: { activeSection?: string }
 ): string {
-  const { prefix, activeSection } = opts;
+  const { activeSection } = opts;
   const items = sections
     .map((sec) => {
-      const path = `${prefix}${sec.slug}/index.html`;
+      const path = sitePath(`/${sec.slug}/`);
       const active =
         activeSection === sec.slug ? ' aria-current="page"' : '';
       return `<li><a href="${path}"${active}>${sec.label}</a></li>`;
@@ -78,11 +79,10 @@ export function renderNav(
 export function renderSectionIndex(sec: NavSection): string {
   const items = sec.items
     .map(({ entry, href }) => {
-      const file = href.split('/').pop()!;
       const meta = entry.meta.trim()
         ? `<span class="muted"> (${entry.meta})</span>`
         : '';
-      return `<li><a href="${file}">${entry.title}</a>${meta}</li>`;
+      return `<li><a href="${href}">${entry.title}</a>${meta}</li>`;
     })
     .join('\n');
 
